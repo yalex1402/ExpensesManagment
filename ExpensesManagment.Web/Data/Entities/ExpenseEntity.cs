@@ -1,9 +1,6 @@
 ﻿using ExpensesManagment.Common;
-using System;
-using System.Collections.Generic;
+using ExpensesManagment.Common.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ExpensesManagment.Web.Data.Entities
 {
@@ -11,12 +8,12 @@ namespace ExpensesManagment.Web.Data.Entities
     {
         public int Id { get; set; }
 
-        [Display(Name ="Addicional Notes")]
-        [MaxLength(280, ErrorMessage = "The {0} field can not have more than {1} characters.") ]
+        [Display(Name = "Addicional Notes")]
+        [MaxLength(280, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string Details { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C}",ApplyFormatInEditMode =true)]
-        [Display(Name ="Price")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Price")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public float Value { get; set; }
 
@@ -27,5 +24,7 @@ namespace ExpensesManagment.Web.Data.Entities
         public ExpenseType ExpenseName { get; set; }
 
         public TripEntity Trip { get; set; }
+
+        public UserEntity User { get; set; }
     }
 }

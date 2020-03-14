@@ -28,6 +28,5 @@ namespace ExpensesManagment.Web
         {
             return WebHost.CreateDefaultBuilder(args).UseStartup<Startup>();
         }
-
     }
 }

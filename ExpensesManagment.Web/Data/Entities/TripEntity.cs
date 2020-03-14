@@ -36,5 +36,7 @@ namespace ExpensesManagment.Web.Data.Entities
         public string CityVisited { get; set; }
 
         public ICollection<ExpenseEntity> Expenses { get; set; }
+
+        public UserEntity User { get; set; }
     }
 }
