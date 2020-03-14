@@ -26,5 +26,6 @@ namespace ExpensesManagment.Web.Data.Entities
         [Display(Name = "Expense Type")]
         public ExpenseType ExpenseName { get; set; }
 
+        public TripEntity Trip { get; set; }
     }
 }
