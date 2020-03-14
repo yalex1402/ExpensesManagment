@@ -36,8 +36,23 @@ namespace ExpensesManagment.Web.Data
                         {
                             Details = "Breakfast in a restaurant.",
                             Value = 25.31f,
-                            PicturePath = $"~/images/Expenses/breakfast.jpg"
-                        } 
+                            PicturePath = $"~/images/Expenses/breakfast.jpg",
+                            ExpenseName = Common.ExpenseType.Food
+                        },
+                        new ExpenseEntity
+                        {
+                            Details = "Hotel",
+                            Value = 449.13f,
+                            PicturePath = $"~/images/Expenses/hotel_bill.jpg",
+                            ExpenseName = Common.ExpenseType.Lodging
+                        },
+                        new ExpenseEntity
+                        {
+                            Details = "Something to eat at noon",
+                            Value = 36.68f,
+                            PicturePath = $"~/images/Expenses/bill_noon.jpg",
+                            ExpenseName = Common.ExpenseType.Food
+                        }
                     }
                 });
 
