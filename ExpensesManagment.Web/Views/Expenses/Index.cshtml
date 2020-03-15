@@ -1,4 +1,59 @@
 ﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+@model IEnumerable<ExpensesManagment.Web.Data.Entities.ExpenseEntity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<br/>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i></a>
+</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Expenses</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="ExpensesTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExpenseName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Value)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PicturePath)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpenseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Value)
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.PicturePath))
+                                    {
+                                        <img src="@Url.Content(item.PicturePath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+</div>
