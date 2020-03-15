@@ -17,11 +17,14 @@ namespace ExpensesManagment.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public float Value { get; set; }
 
-        [Display(Name = "Picture Path")]
+        [Display(Name = "Photo")]
         public string PicturePath { get; set; }
 
         [Display(Name = "Expense Type")]
         public ExpenseType ExpenseName { get; set; }
+
+        [Display(Name = "Logo")]
+        public string LogoPath { get; set; }
 
         public TripEntity Trip { get; set; }
 

@@ -86,7 +86,8 @@ namespace ExpensesManagment.Web.Data
                             Details = "Breakfast in a restaurant.",
                             Value = 25.31f,
                             PicturePath = $"~/images/Expenses/breakfast.jpg",
-                            ExpenseName = Common.ExpenseType.Food
+                            ExpenseName = Common.ExpenseType.Food,
+                            LogoPath = $"~/images/Expenses/Food.png"
                         },
                         new ExpenseEntity
                         {
@@ -94,7 +95,8 @@ namespace ExpensesManagment.Web.Data
                             Details = "Hotel",
                             Value = 449.13f,
                             PicturePath = $"~/images/Expenses/hotel_bill.jpg",
-                            ExpenseName = Common.ExpenseType.Lodging
+                            ExpenseName = Common.ExpenseType.Lodging,
+                            LogoPath = $"~/images/Expenses/Lodging.png"
                         },
                         new ExpenseEntity
                         {
@@ -102,14 +104,15 @@ namespace ExpensesManagment.Web.Data
                             Details = "Something to eat at noon",
                             Value = 36.68f,
                             PicturePath = $"~/images/Expenses/bill_noon.jpg",
-                            ExpenseName = Common.ExpenseType.Food
+                            ExpenseName = Common.ExpenseType.Food,
+                            LogoPath = $"~/images/Expenses/Food.png"
                         }
                     }
                 });
 
                 await _dataContext.SaveChangesAsync();
             }
-
         }
+
     }
 }
