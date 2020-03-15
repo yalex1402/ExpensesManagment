@@ -1,4 +1,5 @@
 ﻿using ExpensesManagment.Web.Data;
+using ExpensesManagment.Web.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -19,5 +20,21 @@ namespace ExpensesManagment.Web.Controllers
         {
             return View(await _dataContext.Expenses.OrderBy(e => e.ExpenseName).ToListAsync());
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ExpenseEntity model = await _dataContext.Expenses
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return View(model);
+        }
+
     }
 }
