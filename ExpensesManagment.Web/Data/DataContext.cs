@@ -13,5 +13,7 @@ namespace ExpensesManagment.Web.Data
         public DbSet<ExpenseEntity> Expenses { get; set; }
 
         public DbSet<TripEntity> Trips { get; set; }
+
+        public DbSet<ExpenseTypeEntity> ExpenseTypes { get; set; }
     }
 }

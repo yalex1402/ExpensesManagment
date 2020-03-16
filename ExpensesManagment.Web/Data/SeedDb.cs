@@ -13,12 +13,15 @@ namespace ExpensesManagment.Web.Data
     {
         private readonly DataContext _dataContext;
         private readonly IUserHelper _userHelper;
+        private readonly IExpenseHelper _expenseHelper;
 
         public SeedDb(DataContext dataContext,
-            IUserHelper userHelper)
+            IUserHelper userHelper,
+            IExpenseHelper expenseHelper)
         {
             _dataContext = dataContext;
             _userHelper = userHelper;
+            _expenseHelper = expenseHelper;
         }
 
         public async Task SeedAsync()
@@ -28,7 +31,24 @@ namespace ExpensesManagment.Web.Data
             UserEntity admin = await CheckUserAsync("1234", "Yesid", "Garcia", "yesidgarcialopez@gmail.com", "304 329 35 82", UserType.Admin);
             UserEntity manager = await CheckUserAsync("1234", "Alexander", "Garcia", "yagarcia1402@gmail.com", "304 329 35 82", UserType.Manager);
             UserEntity user = await CheckUserAsync("1234", "Yesid", "Garcia", "yesidgarcia229967@correo.itm.edu.co", "304 329 35 82", UserType.Employee);
+            await CheckExpenseTypesAsync();
             await CheckTripsAsync(user);
+        }
+
+        private async Task CheckExpenseTypesAsync()
+        {
+            if (!_dataContext.ExpenseTypes.Any())
+            {
+                _dataContext.Add(new ExpenseTypeEntity { Name = "Food", LogoPath = $"~/images/Expenses/Food.png" });
+                _dataContext.Add(new ExpenseTypeEntity { Name = "Lodging", LogoPath = $"~/images/Expenses/Lodging.png" });
+                _dataContext.Add(new ExpenseTypeEntity { Name = "Transport", LogoPath = $"~/images/Expenses/Transport.png" });
+                _dataContext.Add(new ExpenseTypeEntity { Name = "Oil", LogoPath = $"~/images/Expenses/Oil.png" });
+                _dataContext.Add(new ExpenseTypeEntity { Name = "Healthcare", LogoPath = $"~/images/Expenses/Healthcare.png" });
+                _dataContext.Add(new ExpenseTypeEntity { Name = "Phone", LogoPath = $"~/images/Expenses/Phone.png" });
+                _dataContext.Add(new ExpenseTypeEntity { Name = "Other"});
+            }
+
+            await _dataContext.SaveChangesAsync();
         }
 
         private async Task<UserEntity> CheckUserAsync(
@@ -86,7 +106,7 @@ namespace ExpensesManagment.Web.Data
                             Details = "Breakfast in a restaurant.",
                             Value = 25.31f,
                             PicturePath = $"~/images/Expenses/breakfast.jpg",
-                            ExpenseName = Common.ExpenseType.Food,
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food"),
                             LogoPath = $"~/images/Expenses/Food.png"
                         },
                         new ExpenseEntity
@@ -95,7 +115,7 @@ namespace ExpensesManagment.Web.Data
                             Details = "Hotel",
                             Value = 449.13f,
                             PicturePath = $"~/images/Expenses/hotel_bill.jpg",
-                            ExpenseName = Common.ExpenseType.Lodging,
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Lodging"),
                             LogoPath = $"~/images/Expenses/Lodging.png"
                         },
                         new ExpenseEntity
@@ -104,7 +124,7 @@ namespace ExpensesManagment.Web.Data
                             Details = "Something to eat at noon",
                             Value = 36.68f,
                             PicturePath = $"~/images/Expenses/bill_noon.jpg",
-                            ExpenseName = Common.ExpenseType.Food,
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food"),
                             LogoPath = $"~/images/Expenses/Food.png"
                         }
                     }
