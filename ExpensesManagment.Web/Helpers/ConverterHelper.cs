@@ -20,7 +20,7 @@ namespace ExpensesManagment.Web.Helpers
             _dataContext = dataContext;
             _expenseHelper = expenseHelper;
         }
-        public async Task<ExpenseEntity> ToExpenseEntity(AddExpenseViewModel model, string picturePath, string logoPath)
+        public async Task<ExpenseEntity> ToExpenseEntity(AddExpenseViewModel model, string picturePath)
         {
             return new ExpenseEntity
             {
@@ -28,7 +28,6 @@ namespace ExpensesManagment.Web.Helpers
                 Details = model.Details,
                 Value = model.Value,
                 PicturePath = picturePath,
-                LogoPath = logoPath
             };
         }
     }

@@ -71,7 +71,7 @@ namespace ExpensesManagment.Web.Controllers
                 {
                     path = await _imageHelper.UploadImageAsync(model.PictureFile, "Expenses");
                 }
-                ExpenseEntity expense = await _converterHelper.ToExpenseEntity(model, path, "");
+                ExpenseEntity expense = await _converterHelper.ToExpenseEntity(model, path);
                 _dataContext.Add(expense);
                 await _dataContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

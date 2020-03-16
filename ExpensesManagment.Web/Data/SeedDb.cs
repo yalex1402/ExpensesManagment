@@ -106,8 +106,7 @@ namespace ExpensesManagment.Web.Data
                             Details = "Breakfast in a restaurant.",
                             Value = 25.31f,
                             PicturePath = $"~/images/Expenses/breakfast.jpg",
-                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food"),
-                            LogoPath = $"~/images/Expenses/Food.png"
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
                         },
                         new ExpenseEntity
                         {
@@ -115,8 +114,7 @@ namespace ExpensesManagment.Web.Data
                             Details = "Hotel",
                             Value = 449.13f,
                             PicturePath = $"~/images/Expenses/hotel_bill.jpg",
-                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Lodging"),
-                            LogoPath = $"~/images/Expenses/Lodging.png"
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Lodging")
                         },
                         new ExpenseEntity
                         {
@@ -124,8 +122,7 @@ namespace ExpensesManagment.Web.Data
                             Details = "Something to eat at noon",
                             Value = 36.68f,
                             PicturePath = $"~/images/Expenses/bill_noon.jpg",
-                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food"),
-                            LogoPath = $"~/images/Expenses/Food.png"
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
                         }
                     }
                 });

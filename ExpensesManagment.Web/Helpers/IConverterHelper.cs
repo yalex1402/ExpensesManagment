@@ -9,6 +9,6 @@ namespace ExpensesManagment.Web.Helpers
 {
     public interface IConverterHelper
     {
-        Task<ExpenseEntity> ToExpenseEntity(AddExpenseViewModel model, string picturePath, string logoPath);
+        Task<ExpenseEntity> ToExpenseEntity(AddExpenseViewModel model, string picturePath);
     }
 }

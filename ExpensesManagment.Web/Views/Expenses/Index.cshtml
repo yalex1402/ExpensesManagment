@@ -24,7 +24,7 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.LogoPath)
+                                @Html.DisplayNameFor(model => model.ExpenseType.LogoPath)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ExpenseType.Name)
@@ -43,9 +43,9 @@
                         {
                             <tr>
                                 <td>
-                                    @if (!string.IsNullOrEmpty(item.LogoPath))
+                                    @if (!string.IsNullOrEmpty(item.ExpenseType.LogoPath))
                                     {
-                                        <img src="@Url.Content(item.LogoPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                                        <img src="@Url.Content(item.ExpenseType.LogoPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
                                     }
                                 </td>
                                 <td>

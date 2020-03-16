@@ -13,9 +13,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    @if (!string.IsNullOrEmpty(Model.LogoPath))
+                    @if (!string.IsNullOrEmpty(Model.ExpenseType.LogoPath))
                     {
-                        <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                        <img src="@Url.Content(Model.ExpenseType.LogoPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
                     }
                 </div>
                 <div class="col-md-4">

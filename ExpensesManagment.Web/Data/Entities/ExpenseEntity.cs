@@ -20,9 +20,6 @@ namespace ExpensesManagment.Web.Data.Entities
         [Display(Name = "Photo")]
         public string PicturePath { get; set; }
 
-        [Display(Name = "Logo")]
-        public string LogoPath { get; set; }
-
         public TripEntity Trip { get; set; }
 
         public UserEntity User { get; set; }
