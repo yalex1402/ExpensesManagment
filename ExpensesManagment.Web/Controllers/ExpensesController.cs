@@ -1,8 +1,8 @@
-﻿using ExpensesManagment.Common;
-using ExpensesManagment.Web.Data;
+﻿using ExpensesManagment.Web.Data;
 using ExpensesManagment.Web.Data.Entities;
 using ExpensesManagment.Web.Helpers;
 using ExpensesManagment.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ExpensesManagment.Web.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     public class ExpensesController : Controller
     {
         private readonly DataContext _dataContext;
@@ -104,7 +105,7 @@ namespace ExpensesManagment.Web.Controllers
             model.ExpenseId = expense.ExpenseType.Id;
             model.LogoPath = expense.ExpenseType.LogoPath;
 
-            if( model == null)
+            if (model == null)
             {
                 return NotFound();
             }
@@ -113,7 +114,7 @@ namespace ExpensesManagment.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit (int id, ExpenseViewModel model)
+        public async Task<IActionResult> Edit(int id, ExpenseViewModel model)
         {
             if (id != model.Id)
             {
@@ -136,7 +137,7 @@ namespace ExpensesManagment.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult>Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
