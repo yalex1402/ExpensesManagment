@@ -20,11 +20,23 @@ namespace ExpensesManagment.Web.Helpers
             _dataContext = dataContext;
             _expenseHelper = expenseHelper;
         }
-        public async Task<ExpenseEntity> ToExpenseEntity(AddExpenseViewModel model, string picturePath)
+        public async Task<ExpenseEntity> ToAddExpenseEntity(ExpenseViewModel model, string picturePath)
         {
             return new ExpenseEntity
             {
-                ExpenseType = await _expenseHelper.GetExpenseTypeAsync(model.ExpenseTypeId),
+                ExpenseType = await _expenseHelper.GetExpenseTypeAsync(model.ExpenseId),
+                Details = model.Details,
+                Value = model.Value,
+                PicturePath = picturePath,
+            };
+        }
+
+        public async Task<ExpenseEntity> ToEditExpenseEntity(ExpenseViewModel model, string picturePath)
+        {
+            return new ExpenseEntity
+            {
+                Id = model.Id,
+                ExpenseType = await _expenseHelper.GetExpenseTypeAsync(model.ExpenseId),
                 Details = model.Details,
                 Value = model.Value,
                 PicturePath = picturePath,

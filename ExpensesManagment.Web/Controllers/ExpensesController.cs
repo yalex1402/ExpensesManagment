@@ -54,7 +54,7 @@ namespace ExpensesManagment.Web.Controllers
 
         public IActionResult Create()
         {
-            AddExpenseViewModel model = new AddExpenseViewModel
+            ExpenseViewModel model = new ExpenseViewModel
             {
                 ExpensesType = _combosHelper.GetComboExpenses()
             };
@@ -62,7 +62,7 @@ namespace ExpensesManagment.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(AddExpenseViewModel model)
+        public async Task<IActionResult> Create(ExpenseViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace ExpensesManagment.Web.Controllers
                 {
                     path = await _imageHelper.UploadImageAsync(model.PictureFile, "Expenses");
                 }
-                ExpenseEntity expense = await _converterHelper.ToExpenseEntity(model, path);
+                ExpenseEntity expense = await _converterHelper.ToAddExpenseEntity(model, path);
                 _dataContext.Add(expense);
                 await _dataContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -79,6 +79,80 @@ namespace ExpensesManagment.Web.Controllers
 
             model.ExpensesType = _combosHelper.GetComboExpenses();
             return View(model);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            ExpenseViewModel model = new ExpenseViewModel
+            {
+                ExpensesType = _combosHelper.GetComboExpenses()
+            };
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ExpenseEntity expense = await _dataContext.Expenses
+                .Include(et => et.ExpenseType)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            model.Id = expense.Id;
+            model.Details = expense.Details;
+            model.PicturePath = expense.PicturePath;
+            model.Value = expense.Value;
+            model.ExpenseId = expense.ExpenseType.Id;
+            model.LogoPath = expense.ExpenseType.LogoPath;
+
+            if( model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit (int id, ExpenseViewModel model)
+        {
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                string path = string.Empty;
+                if (model.PictureFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Expenses");
+                }
+                ExpenseEntity expense = await _converterHelper.ToEditExpenseEntity(model, model.PicturePath);
+                _dataContext.Update(expense);
+                await _dataContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            model.ExpensesType = _combosHelper.GetComboExpenses();
+            return View(model);
+        }
+
+        public async Task<IActionResult>Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ExpenseEntity expense = await _dataContext.Expenses.FirstOrDefaultAsync(e => e.Id == id);
+
+            if (expense == null)
+            {
+                return NotFound();
+            }
+
+            _dataContext.Expenses.Remove(expense);
+            await _dataContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
