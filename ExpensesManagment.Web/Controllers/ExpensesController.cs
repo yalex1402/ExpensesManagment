@@ -5,6 +5,7 @@ using ExpensesManagment.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,6 +73,7 @@ namespace ExpensesManagment.Web.Controllers
                 {
                     path = await _imageHelper.UploadImageAsync(model.PictureFile, "Expenses");
                 }
+                model.Date = DateTime.UtcNow;
                 ExpenseEntity expense = await _converterHelper.ToAddExpenseEntity(model, path);
                 _dataContext.Add(expense);
                 await _dataContext.SaveChangesAsync();
@@ -114,20 +116,17 @@ namespace ExpensesManagment.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, ExpenseViewModel model)
+        public async Task<IActionResult> Edit(ExpenseViewModel model)
         {
-            if (id != model.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 string path = string.Empty;
                 if (model.PictureFile != null)
                 {
                     path = await _imageHelper.UploadImageAsync(model.PictureFile, "Expenses");
+                    model.PicturePath = path;
                 }
+                
                 ExpenseEntity expense = await _converterHelper.ToEditExpenseEntity(model, model.PicturePath);
                 _dataContext.Update(expense);
                 await _dataContext.SaveChangesAsync();

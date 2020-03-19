@@ -1,5 +1,6 @@
 ﻿using ExpensesManagment.Common;
 using ExpensesManagment.Common.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExpensesManagment.Web.Data.Entities
@@ -16,6 +17,10 @@ namespace ExpensesManagment.Web.Data.Entities
         [Display(Name = "Price")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public float Value { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public DateTime DateToLocal => Date.ToLocalTime();
 
         [Display(Name = "Photo")]
         public string PicturePath { get; set; }

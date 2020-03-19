@@ -27,6 +27,7 @@ namespace ExpensesManagment.Web.Helpers
                 ExpenseType = await _expenseHelper.GetExpenseTypeAsync(model.ExpenseId),
                 Details = model.Details,
                 Value = model.Value,
+                Date = model.Date,
                 PicturePath = picturePath,
             };
         }
@@ -39,6 +40,7 @@ namespace ExpensesManagment.Web.Helpers
                 ExpenseType = await _expenseHelper.GetExpenseTypeAsync(model.ExpenseId),
                 Details = model.Details,
                 Value = model.Value,
+                Date = model.Date,
                 PicturePath = picturePath,
             };
         }

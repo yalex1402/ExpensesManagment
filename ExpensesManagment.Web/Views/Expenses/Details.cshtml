@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     @if (!string.IsNullOrEmpty(Model.ExpenseType.LogoPath))
                     {
                         <img src="@Url.Content(Model.ExpenseType.LogoPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
@@ -21,6 +21,10 @@
                 <div class="col-md-4">
                     <label asp-for="ExpenseType.Name" class="control-label"></label>
                     <input asp-for="ExpenseType.Name" class="form-control" readonly />
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="DateToLocal" class="control-label"></label>
+                    <input asp-for="DateToLocal" class="form-control" readonly />
                 </div>
             </div>
             <div class="row">

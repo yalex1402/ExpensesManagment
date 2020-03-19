@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -26,7 +27,11 @@ namespace ExpensesManagment.Web.Models
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public float Value { get; set; }
 
-        [Display(Name = "Picture")]
+        public DateTime Date { get; set; }
+
+        public DateTime DateToLocal => Date.ToLocalTime();
+
+        [Display(Name = "Picture File")]
         public IFormFile PictureFile { get; set; }
 
         [Display(Name = "Picture")]

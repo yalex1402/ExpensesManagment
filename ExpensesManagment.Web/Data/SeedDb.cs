@@ -105,6 +105,7 @@ namespace ExpensesManagment.Web.Data
                             User = employee,
                             Details = "Breakfast in a restaurant.",
                             Value = 25.31f,
+                            Date = DateTime.UtcNow,
                             PicturePath = $"~/images/Expenses/breakfast.jpg",
                             ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
                         },
@@ -113,6 +114,7 @@ namespace ExpensesManagment.Web.Data
                             User = employee,
                             Details = "Hotel",
                             Value = 449.13f,
+                            Date = DateTime.UtcNow.AddMinutes(35),
                             PicturePath = $"~/images/Expenses/hotel_bill.jpg",
                             ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Lodging")
                         },
@@ -121,6 +123,44 @@ namespace ExpensesManagment.Web.Data
                             User = employee,
                             Details = "Something to eat at noon",
                             Value = 36.68f,
+                            Date = DateTime.UtcNow.AddMinutes(90),
+                            PicturePath = $"~/images/Expenses/bill_noon.jpg",
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
+                        }
+                    }
+                });
+                _dataContext.Trips.Add(new TripEntity
+                {
+                    User = employee,
+                    StartDate = DateTime.UtcNow.AddHours(3),
+                    EndDate = DateTime.UtcNow.AddMinutes(45),
+                    CityVisited = "Chicago",
+                    Expenses = new List<ExpenseEntity>
+                    {
+                        new ExpenseEntity
+                        {
+                            User = employee,
+                            Details = "Breakfast in a restaurant.",
+                            Value = 28f,
+                            Date = DateTime.UtcNow.AddHours(4),
+                            PicturePath = $"~/images/Expenses/breakfast.jpg",
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
+                        },
+                        new ExpenseEntity
+                        {
+                            User = employee,
+                            Details = "Hotel",
+                            Value = 449.13f,
+                            Date = DateTime.UtcNow.AddHours(5),
+                            PicturePath = $"~/images/Expenses/hotel_bill.jpg",
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Lodging")
+                        },
+                        new ExpenseEntity
+                        {
+                            User = employee,
+                            Details = "Something to eat at noon",
+                            Value = 36.68f,
+                            Date = DateTime.UtcNow.AddHours(5.5),
                             PicturePath = $"~/images/Expenses/bill_noon.jpg",
                             ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
                         }
