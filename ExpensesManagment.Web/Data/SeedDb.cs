@@ -31,8 +31,10 @@ namespace ExpensesManagment.Web.Data
             UserEntity admin = await CheckUserAsync("1234", "Yesid", "Garcia", "yesidgarcialopez@gmail.com", "304 329 35 82", UserType.Admin);
             UserEntity manager = await CheckUserAsync("1234", "Alexander", "Garcia", "yagarcia1402@gmail.com", "304 329 35 82", UserType.Manager);
             UserEntity user = await CheckUserAsync("1234", "Yesid", "Garcia", "yesidgarcia229967@correo.itm.edu.co", "304 329 35 82", UserType.Employee);
+            UserEntity user2 = await CheckUserAsync("1234", "Facundo", "Fortunatti", "fortunattibernard@gmail.com", "304 329 35 82", UserType.Employee);
+            UserEntity user3 = await CheckUserAsync("1234", "Carolina", "Muñoz", "caroml98@hotmail.com", "304 329 35 82", UserType.Employee);
             await CheckExpenseTypesAsync();
-            await CheckTripsAsync(user);
+            await CheckTripsAsync(user, user2, user3);
         }
 
         private async Task CheckExpenseTypesAsync()
@@ -88,7 +90,7 @@ namespace ExpensesManagment.Web.Data
             await _userHelper.CheckRoleAsync(UserType.Employee.ToString());
         }
 
-        private async Task CheckTripsAsync(UserEntity employee)
+        private async Task CheckTripsAsync(UserEntity employee, UserEntity employee2, UserEntity employee3)
         {
             if (!_dataContext.Trips.Any())
             {
@@ -96,7 +98,7 @@ namespace ExpensesManagment.Web.Data
                 {
                     User = employee,
                     StartDate = DateTime.UtcNow,
-                    EndDate = DateTime.UtcNow.AddMinutes(45),
+                    EndDate = DateTime.UtcNow.AddHours(27),
                     CityVisited = "New York",
                     Expenses = new List<ExpenseEntity>
                     {
@@ -133,7 +135,7 @@ namespace ExpensesManagment.Web.Data
                 {
                     User = employee,
                     StartDate = DateTime.UtcNow.AddHours(3),
-                    EndDate = DateTime.UtcNow.AddMinutes(45),
+                    EndDate = DateTime.UtcNow.AddHours(32),
                     CityVisited = "Chicago",
                     Expenses = new List<ExpenseEntity>
                     {
@@ -166,7 +168,80 @@ namespace ExpensesManagment.Web.Data
                         }
                     }
                 });
-
+                _dataContext.Trips.Add(new TripEntity
+                {
+                    User = employee2,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddHours(27),
+                    CityVisited = "Philadelphia",
+                    Expenses = new List<ExpenseEntity>
+                    {
+                        new ExpenseEntity
+                        {
+                            User = employee2,
+                            Details = "Breakfast in a restaurant.",
+                            Value = 25.31f,
+                            Date = DateTime.UtcNow,
+                            PicturePath = $"~/images/Expenses/breakfast.jpg",
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
+                        },
+                        new ExpenseEntity
+                        {
+                            User = employee2,
+                            Details = "Hotel",
+                            Value = 520.3f,
+                            Date = DateTime.UtcNow.AddMinutes(35),
+                            PicturePath = $"~/images/Expenses/hotel_bill.jpg",
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Lodging")
+                        },
+                        new ExpenseEntity
+                        {
+                            User = employee2,
+                            Details = "Something to eat at noon",
+                            Value = 73.5f,
+                            Date = DateTime.UtcNow.AddMinutes(90),
+                            PicturePath = $"~/images/Expenses/bill_noon.jpg",
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
+                        }
+                    }
+                });
+                _dataContext.Trips.Add(new TripEntity
+                {
+                    User = employee3,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddHours(27),
+                    CityVisited = "Florida",
+                    Expenses = new List<ExpenseEntity>
+                    {
+                        new ExpenseEntity
+                        {
+                            User = employee3,
+                            Details = "Breakfast in a restaurant.",
+                            Value = 25.31f,
+                            Date = DateTime.UtcNow,
+                            PicturePath = $"~/images/Expenses/breakfast.jpg",
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
+                        },
+                        new ExpenseEntity
+                        {
+                            User = employee3,
+                            Details = "Hotel",
+                            Value = 449.13f,
+                            Date = DateTime.UtcNow.AddMinutes(35),
+                            PicturePath = $"~/images/Expenses/hotel_bill.jpg",
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Lodging")
+                        },
+                        new ExpenseEntity
+                        {
+                            User = employee3,
+                            Details = "Something to eat at noon",
+                            Value = 36.68f,
+                            Date = DateTime.UtcNow.AddMinutes(90),
+                            PicturePath = $"~/images/Expenses/bill_noon.jpg",
+                            ExpenseType = await _expenseHelper.GetExpenseTypeAsync("Food")
+                        }
+                    }
+                });
                 await _dataContext.SaveChangesAsync();
             }
         }
