@@ -42,6 +42,11 @@
     </div>
 </div>
 
+<p>
+    <a asp-action="CreateExpense" asp-route-id="@Model.TripId" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add New Expense</a>
+    <a asp-action="UserTripDetail" asp-route-id="@Model.User.Id" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Go Back</a>
+</p>
+
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">

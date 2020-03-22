@@ -30,23 +30,8 @@
                     <span asp-validation-for="ExpenseId" class="text-danger"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Details" class="control-label"></label>
-                <input asp-for="Details" class="form-control" />
-                <span asp-validation-for="Details" class="text-danger"></span>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control" />
-                <span asp-validation-for="Value" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="PictureFile" class="control-label"></label>
-                <input asp-for="PictureFile" class="form-control-file" type="file" />
-                <span asp-validation-for="PictureFile" class="text-danger"></span>
-            </div>
+            <partial name="_Expense" />
 
             <div class="form-group">
                 <input type="submit" value="Edit" class="btn btn-primary" />

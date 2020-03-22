@@ -5,6 +5,7 @@ using ExpensesManagment.Web.Helpers;
 using ExpensesManagment.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -274,6 +275,37 @@ namespace ExpensesManagment.Web.Controllers
             {
                 return NotFound();
             }
+            return View(model);
+        }
+
+        public IActionResult CreateExpense(int id)
+        {
+            ExpenseViewModel model = new ExpenseViewModel
+            {
+                TripId = id,
+                ExpensesType = _combosHelper.GetComboExpenses()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateExpense(ExpenseViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string path = string.Empty;
+                if (model.PictureFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Expenses");
+                }
+                model.Date = DateTime.UtcNow;
+                ExpenseEntity expense = await _converterHelper.ToAddExpenseEntity(model, path);
+                _dataContext.Add(expense);
+                await _dataContext.SaveChangesAsync();
+                return RedirectToAction($"{nameof(TripExpensesDetail)}/{model.TripId}");
+            }
+
+            model.ExpensesType = _combosHelper.GetComboExpenses();
             return View(model);
         }
     }

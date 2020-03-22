@@ -9,6 +9,7 @@ namespace ExpensesManagment.Web.Models
 {
     public class ExpenseViewModel : ExpenseEntity
     {
+        public string UserId { get; set; }
 
         public int TripId { get; set; }
 

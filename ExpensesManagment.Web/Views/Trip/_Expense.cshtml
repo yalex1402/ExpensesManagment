@@ -1,0 +1,19 @@
+﻿@model ExpensesManagment.Web.Models.ExpenseViewModel
+
+<div class="form-group">
+    <label asp-for="Details" class="control-label"></label>
+    <input asp-for="Details" class="form-control" />
+    <span asp-validation-for="Details" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Value" class="control-label"></label>
+    <input asp-for="Value" class="form-control" />
+    <span asp-validation-for="Value" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="PictureFile" class="control-label"></label>
+    <input asp-for="PictureFile" class="form-control" type="file" />
+    <span asp-validation-for="PictureFile" class="text-danger"></span>
+</div>

@@ -29,8 +29,11 @@ namespace ExpensesManagment.Web.Helpers
         }
         public async Task<ExpenseEntity> ToAddExpenseEntity(ExpenseViewModel model, string picturePath)
         {
+            TripEntity tripEntity = await _tripHelper.GetTripAsync(model.TripId);
             return new ExpenseEntity
             {
+                Trip = tripEntity,
+                User = tripEntity.User,
                 ExpenseType = await _expenseHelper.GetExpenseTypeAsync(model.ExpenseId),
                 Details = model.Details,
                 Value = model.Value,
@@ -41,6 +44,7 @@ namespace ExpensesManagment.Web.Helpers
 
         public async Task<ExpenseEntity> ToEditExpenseEntity(ExpenseViewModel model, string picturePath)
         {
+            TripEntity tripEntity = await _tripHelper.GetTripAsync(model.TripId);
             return new ExpenseEntity
             {
                 Id = model.Id,
@@ -49,6 +53,8 @@ namespace ExpensesManagment.Web.Helpers
                 Value = model.Value,
                 Date = model.Date.ToUniversalTime(),
                 PicturePath = picturePath,
+                Trip = tripEntity,
+                User = tripEntity.User,
             };
         }
 

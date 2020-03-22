@@ -1,0 +1,37 @@
+﻿@model ExpensesManagment.Web.Models.ExpenseViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>New Expense</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateExpense" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TripId" />
+
+            <div class="form-group">
+                <label asp-for="ExpenseId" class="control-label"></label>
+                <select asp-for="ExpenseId" asp-items="Model.ExpensesType" class="form-control"></select>
+                <span asp-validation-for="ExpenseId" class="text-danger"></span>
+            </div>
+            
+            <partial name="_Expense" />
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="TripExpensesDetail" asp-route-id="@Model.TripId" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Back to List</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
