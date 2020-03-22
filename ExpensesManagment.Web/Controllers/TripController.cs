@@ -85,5 +85,43 @@ namespace ExpensesManagment.Web.Controllers
             }
             return View(model);
         }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            TripEntity tripEntity = await _dataContext.Trips
+                .Include(t => t.User)
+                .FirstOrDefaultAsync(tu => tu.Id == id);
+
+            if (tripEntity == null)
+            {
+                return NotFound();
+            }
+
+            _dataContext.Trips.Remove(tripEntity);
+            await _dataContext.SaveChangesAsync();
+            return RedirectToAction($"{nameof(UserTripDetail)}/{tripEntity.User.Id}");
+        }
+
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            UserEntity userEntity = await _dataContext.Users
+                .Include(u => u.Trips)
+                .ThenInclude(u => u.Expenses)
+                .FirstOrDefaultAsync(ut => ut.Id == id);
+
+            if (userEntity == null)
+            {
+                return NotFound();
+            }
+
+            _dataContext.Remove(userEntity);
+            await _dataContext.SaveChangesAsync();
+            return RedirectToAction($"{nameof(UserTrip)}");
+        }
     }
 }
