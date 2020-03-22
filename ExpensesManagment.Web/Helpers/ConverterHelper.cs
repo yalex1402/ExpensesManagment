@@ -2,6 +2,7 @@
 using ExpensesManagment.Web.Data;
 using ExpensesManagment.Web.Data.Entities;
 using ExpensesManagment.Web.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,20 @@ namespace ExpensesManagment.Web.Helpers
                 UserName = user.FullName,
                 UserPicture = user.PicturePath,
                 Trips = await _tripHelper.GetTrips(id)
+            };
+        }
+
+        public async Task<TripExpenseViewModel> ToTripExpenseViewModel(int? id)
+        {
+            List<ExpenseEntity> expenseEntities = await _expenseHelper.GetExpesesAsync(id);
+            TripEntity tripEntity = await _tripHelper.GetTripAsync(id);
+
+            return new TripExpenseViewModel
+            {
+                Trip = tripEntity,
+                TripId = tripEntity.Id,
+                Expenses = expenseEntities,
+                User = tripEntity.User
             };
         }
 

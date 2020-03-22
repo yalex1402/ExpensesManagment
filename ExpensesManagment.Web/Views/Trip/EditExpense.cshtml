@@ -1,0 +1,67 @@
+﻿@model ExpensesManagment.Web.Models.ExpenseViewModel
+
+@{
+    ViewData["Title"] = "Expense Details";
+}
+
+<h1>Edit</h1>
+<h4>Modify the expense:</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditExpense" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="PicturePath" />
+            <input type="hidden" asp-for="Date" />
+            <input type="hidden" asp-for="TripId" />
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @if (!string.IsNullOrEmpty(Model.LogoPath))
+                    {
+                        <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                    }
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="ExpenseId" class="control-label"></label>
+                    <select asp-for="ExpenseId" asp-items="Model.ExpensesType" class="form-control"></select>
+                    <span asp-validation-for="ExpenseId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Details" class="control-label"></label>
+                <input asp-for="Details" class="form-control" />
+                <span asp-validation-for="Details" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PictureFile" class="control-label"></label>
+                <input asp-for="PictureFile" class="form-control-file" type="file" />
+                <span asp-validation-for="PictureFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+                <a asp-action="TripExpensesDetail" asp-route-id="@Model.TripId" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>Back to List</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(Model.PicturePath))
+        {
+            <img src="@Url.Content(Model.PicturePath)" alt="Image" style="width:300px;height:300px;max-width: 100%; height: auto;" />
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

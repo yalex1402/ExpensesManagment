@@ -27,7 +27,7 @@ namespace ExpensesManagment.Web.Helpers
         }
 
 
-        public async Task<List<ExpenseEntity>> GetExpesesAsync(int tripId)
+        public async Task<List<ExpenseEntity>> GetExpesesAsync(int? tripId)
         {
             List<ExpenseEntity> expenseEntities = await _dataContext.Expenses
                 .Include(e => e.ExpenseType)

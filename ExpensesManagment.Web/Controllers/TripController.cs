@@ -16,14 +16,23 @@ namespace ExpensesManagment.Web.Controllers
         private readonly DataContext _dataContext;
         private readonly IConverterHelper _converterHelper;
         private readonly ITripHelper _tripHelper;
+        private readonly IExpenseHelper _expenseHelper;
+        private readonly IImageHelper _imageHelper;
+        private readonly ICombosHelper _combosHelper;
 
         public TripController(DataContext dataContext,
             IConverterHelper converterHelper,
-            ITripHelper tripHelper)
+            ITripHelper tripHelper,
+            IExpenseHelper expenseHelper,
+            IImageHelper imageHelper,
+            ICombosHelper combosHelper)
         {
             _dataContext = dataContext;
             _converterHelper = converterHelper;
             _tripHelper = tripHelper;
+            _expenseHelper = expenseHelper;
+            _imageHelper = imageHelper;
+            _combosHelper = combosHelper;
         }
 
         public async Task<IActionResult> UserTrip()
@@ -45,6 +54,23 @@ namespace ExpensesManagment.Web.Controllers
 
             UserTripDetailViewModel model = await _converterHelper.ToUserTripDetailViewModel(id);
 
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> TripExpensesDetail(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+            TripExpenseViewModel model = await _converterHelper.ToTripExpenseViewModel(id);
+            
             if (model == null)
             {
                 return NotFound();
@@ -156,6 +182,60 @@ namespace ExpensesManagment.Web.Controllers
                 await _dataContext.SaveChangesAsync();
                 return RedirectToAction($"{nameof(UserTripDetail)}/{model.UserId}");
             }
+            return View(model);
+        }
+
+        public async Task<IActionResult> EditExpense(int? id)
+        {
+            ExpenseViewModel model = new ExpenseViewModel
+            {
+                ExpensesType = _combosHelper.GetComboExpenses()
+            };
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ExpenseEntity expense = await _dataContext.Expenses
+                .Include(et => et.ExpenseType)
+                .Include (et => et.Trip)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            model.TripId = expense.Trip.Id;
+            model.Id = expense.Id;
+            model.Details = expense.Details;
+            model.PicturePath = expense.PicturePath;
+            model.Value = expense.Value;
+            model.ExpenseId = expense.ExpenseType.Id;
+            model.LogoPath = expense.ExpenseType.LogoPath;
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditExpense(ExpenseViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string path = string.Empty;
+                if (model.PictureFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Expenses");
+                    model.PicturePath = path;
+                }
+
+                ExpenseEntity expense = await _converterHelper.ToEditExpenseEntity(model, model.PicturePath);
+                _dataContext.Update(expense);
+                await _dataContext.SaveChangesAsync();
+                return RedirectToAction($"{nameof(TripExpensesDetail)}/{model.TripId}");
+            }
+            model.ExpensesType = _combosHelper.GetComboExpenses();
             return View(model);
         }
     }

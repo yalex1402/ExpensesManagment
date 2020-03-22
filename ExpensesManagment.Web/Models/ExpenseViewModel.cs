@@ -10,6 +10,8 @@ namespace ExpensesManagment.Web.Models
     public class ExpenseViewModel : ExpenseEntity
     {
 
+        public int TripId { get; set; }
+
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         [Display(Name = "Register expense as")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select a role.")]
