@@ -50,7 +50,40 @@ namespace ExpensesManagment.Web.Controllers
             return View(model);
         }
 
-        
-
+        public async Task<IActionResult> Create(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+            UserEntity userEntity = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            
+            if(userEntity == null)
+            {
+                return NotFound();
+            }
+            
+            TripViewModel model = new TripViewModel
+            {
+                User = userEntity,
+                UserId = userEntity.Id
+            };
+            
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(TripViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                UserEntity userEntity = await _dataContext.Users.FindAsync(model.UserId);
+                TripEntity tripEntity = await _converterHelper.ToTripEntity(model);
+                _dataContext.Add(tripEntity);
+                await _dataContext.SaveChangesAsync();
+                return RedirectToAction($"{nameof(UserTripDetail)}/{model.UserId}");
+            }
+            return View(model);
+        }
     }
 }

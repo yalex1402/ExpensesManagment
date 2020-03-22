@@ -60,5 +60,16 @@ namespace ExpensesManagment.Web.Helpers
                 Trips = await _tripHelper.GetTrips(id)
             };
         }
+
+        public async Task<TripEntity> ToTripEntity (TripViewModel model)
+        {
+            return new TripEntity
+            {
+                CityVisited = model.CityVisited,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                User = await _dataContext.Users.FindAsync(model.UserId)
+            };
+        }
     }
 }
