@@ -1,6 +1,8 @@
 ﻿using ExpensesManagment.Common.Enums;
 using ExpensesManagment.Web.Data;
 using ExpensesManagment.Web.Data.Entities;
+using ExpensesManagment.Web.Helpers;
+using ExpensesManagment.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -12,18 +14,13 @@ namespace ExpensesManagment.Web.Controllers
     public class TripController : Controller
     {
         private readonly DataContext _dataContext;
+        private readonly IConverterHelper _converterHelper;
 
-        public TripController(DataContext dataContext)
+        public TripController(DataContext dataContext,
+            IConverterHelper converterHelper)
         {
             _dataContext = dataContext;
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            return View(await _dataContext.Trips
-                .Include(t => t.Expenses)
-                .OrderBy(t => t.StartDate)
-                .ToListAsync());
+            _converterHelper = converterHelper;
         }
 
         public async Task<IActionResult> UserTrip()
@@ -43,19 +40,17 @@ namespace ExpensesManagment.Web.Controllers
                 return NotFound();
             }
 
-            List<TripEntity> tripEntity = await _dataContext.Trips
-                .Include(t=> t.Expenses)
-                .Where(t => t.User.Id == id)
-                .OrderBy(t=> t.StartDate)
-                .ToListAsync();
+            UserTripDetailViewModel model = await _converterHelper.ToUserTripDetailViewModel(id);
 
-            if (tripEntity == null)
+            if (model == null)
             {
                 return NotFound();
             }
 
-            return View(tripEntity);
+            return View(model);
         }
+
+        
 
     }
 }

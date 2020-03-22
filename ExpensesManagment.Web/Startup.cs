@@ -50,6 +50,7 @@ namespace ExpensesManagment.Web
             services.AddScoped<ICombosHelper, CombosHelper>();
             services.AddScoped<IConverterHelper, ConverterHelper>();
             services.AddScoped<IExpenseHelper, ExpenseHelper>();
+            services.AddScoped<ITripHelper, TripHelper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

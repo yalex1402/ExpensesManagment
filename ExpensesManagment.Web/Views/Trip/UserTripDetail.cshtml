@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ExpensesManagment.Web.Data.Entities.TripEntity>
+﻿@model ExpensesManagment.Web.Models.UserTripDetailViewModel
 
 @{
     ViewData["Title"] = "User Trip Details";
@@ -7,8 +7,37 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 <br />
 
+<div>
+    <h4>User</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserEmail)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.UserEmail)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.UserPicture))
+            {
+                <img src="@Url.Content(Model.UserPicture)" alt="Image" style="width:150px;height:150px;max-width: 100%; height: auto;" />
+            }
+        </div>
+    </div>
+</div>
+
 <p>
-    <a asp-action="Create" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i></a>
+    <a asp-action="Create" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add New Trip</a>
 </p>
 
 <div class="row">
@@ -22,13 +51,13 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.CityVisited)
+                                City Visited
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.StartDate)
+                                Start Date
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.EndDate)
+                                End Date
                             </th>
                             <th>
                                 # Expenses
@@ -37,7 +66,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Trips)
                         {
                             <tr>
                                 <td>
@@ -53,6 +82,7 @@
                                     @Html.DisplayFor(modelItem => item.Expenses.Count)
                                 </td>
                                 <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon-align-justify"></i></a>
                                     <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
                                 </td>

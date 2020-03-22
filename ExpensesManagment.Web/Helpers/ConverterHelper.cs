@@ -13,12 +13,15 @@ namespace ExpensesManagment.Web.Helpers
     {
         private readonly DataContext _dataContext;
         private readonly IExpenseHelper _expenseHelper;
+        private readonly ITripHelper _tripHelper;
 
         public ConverterHelper(DataContext dataContext,
-            IExpenseHelper expenseHelper)
+            IExpenseHelper expenseHelper,
+            ITripHelper tripHelper)
         {
             _dataContext = dataContext;
             _expenseHelper = expenseHelper;
+            _tripHelper = tripHelper;
         }
         public async Task<ExpenseEntity> ToAddExpenseEntity(ExpenseViewModel model, string picturePath)
         {
@@ -42,6 +45,19 @@ namespace ExpensesManagment.Web.Helpers
                 Value = model.Value,
                 Date = model.Date,
                 PicturePath = picturePath,
+            };
+        }
+
+        public async Task<UserTripDetailViewModel> ToUserTripDetailViewModel(string id)
+        {
+            UserEntity user = await _dataContext.Users.FindAsync(id);
+            return new UserTripDetailViewModel
+            {
+                UserId = user.Id,
+                UserEmail = user.Email,
+                UserName = user.FullName,
+                UserPicture = user.PicturePath,
+                Trips = await _tripHelper.GetTrips(id)
             };
         }
     }

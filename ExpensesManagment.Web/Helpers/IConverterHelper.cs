@@ -12,5 +12,7 @@ namespace ExpensesManagment.Web.Helpers
         Task<ExpenseEntity> ToAddExpenseEntity(ExpenseViewModel model, string picturePath);
 
         Task<ExpenseEntity> ToEditExpenseEntity(ExpenseViewModel model, string picturePath);
+
+        Task<UserTripDetailViewModel> ToUserTripDetailViewModel(string id);
     }
 }
