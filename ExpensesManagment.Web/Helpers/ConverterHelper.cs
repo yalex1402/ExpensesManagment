@@ -14,14 +14,17 @@ namespace ExpensesManagment.Web.Helpers
         private readonly DataContext _dataContext;
         private readonly IExpenseHelper _expenseHelper;
         private readonly ITripHelper _tripHelper;
+        private readonly IUserHelper _userHelper;
 
         public ConverterHelper(DataContext dataContext,
             IExpenseHelper expenseHelper,
-            ITripHelper tripHelper)
+            ITripHelper tripHelper,
+            IUserHelper userHelper)
         {
             _dataContext = dataContext;
             _expenseHelper = expenseHelper;
             _tripHelper = tripHelper;
+            _userHelper = userHelper;
         }
         public async Task<ExpenseEntity> ToAddExpenseEntity(ExpenseViewModel model, string picturePath)
         {
@@ -30,7 +33,7 @@ namespace ExpensesManagment.Web.Helpers
                 ExpenseType = await _expenseHelper.GetExpenseTypeAsync(model.ExpenseId),
                 Details = model.Details,
                 Value = model.Value,
-                Date = model.Date,
+                Date = model.Date.ToUniversalTime(),
                 PicturePath = picturePath,
             };
         }
@@ -43,7 +46,7 @@ namespace ExpensesManagment.Web.Helpers
                 ExpenseType = await _expenseHelper.GetExpenseTypeAsync(model.ExpenseId),
                 Details = model.Details,
                 Value = model.Value,
-                Date = model.Date,
+                Date = model.Date.ToUniversalTime(),
                 PicturePath = picturePath,
             };
         }
@@ -61,14 +64,41 @@ namespace ExpensesManagment.Web.Helpers
             };
         }
 
-        public async Task<TripEntity> ToTripEntity (TripViewModel model)
+        public async Task<TripEntity> ToAddTripEntity (TripViewModel model)
         {
             return new TripEntity
             {
                 CityVisited = model.CityVisited,
-                StartDate = model.StartDate,
-                EndDate = model.EndDate,
+                StartDate = model.StartDate.ToUniversalTime(),
+                EndDate = model.EndDate.ToUniversalTime(),
                 User = await _dataContext.Users.FindAsync(model.UserId)
+            };
+        }
+
+        public async Task<TripEntity> ToEditTripEntity(TripViewModel model)
+        {
+            return new TripEntity
+            {
+                Id = model.TripId,
+                CityVisited = model.CityVisited,
+                StartDate = model.StartDate.ToUniversalTime(),
+                EndDate = model.EndDate.ToUniversalTime(),
+                User = await _dataContext.Users.FindAsync(model.UserId),
+                Expenses = await _expenseHelper.GetExpesesAsync(model.TripId)
+            };
+        }
+
+        public async Task<TripViewModel> ToTripViewModel (TripEntity model)
+        {
+            UserEntity userEntity = await _userHelper.GetUserAsync(model.User.Email);
+            return new TripViewModel
+            {
+                TripId = model.Id,
+                StartDate = model.StartDate.ToLocalTime(),
+                EndDate = model.EndDate.ToLocalTime(),
+                CityVisited = model.CityVisited,
+                User = userEntity,
+                UserId = userEntity.Id
             };
         }
     }

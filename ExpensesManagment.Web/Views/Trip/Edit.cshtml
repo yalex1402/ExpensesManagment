@@ -1,19 +1,20 @@
 ﻿@model ExpensesManagment.Web.Models.TripViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h2>Create</h2>
+<h2>Edit</h2>
 
-<h4>Trip to user: @Model.User.FullName</h4>
+<h4>This trip was done by: @Model.User.FullName</h4>
 <hr />
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="TripId" />
 
             <partial name="_Trip" />
 
@@ -24,6 +25,7 @@
         </form>
     </div>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

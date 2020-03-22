@@ -12,5 +12,7 @@ namespace ExpensesManagment.Web.Helpers
 
         Task<ExpenseTypeEntity> GetExpenseTypeAsync(int id);
 
+        Task<List<ExpenseEntity>> GetExpesesAsync(int tripId);
+
     }
 }

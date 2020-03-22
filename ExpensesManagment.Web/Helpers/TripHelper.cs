@@ -27,5 +27,14 @@ namespace ExpensesManagment.Web.Helpers
                 .ToListAsync();
             return tripEntity;
         }
+
+        public async Task<TripEntity> GetTripAsync(int? id)
+        {
+            TripEntity tripEntity = await _dataContext.Trips
+                .Include(t => t.User)
+                .Include(t => t.Expenses)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            return tripEntity;
+        }
     }
 }

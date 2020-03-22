@@ -9,5 +9,7 @@ namespace ExpensesManagment.Web.Helpers
     public interface ITripHelper
     {
         Task<List<TripEntity>> GetTrips(string id);
+
+        Task<TripEntity> GetTripAsync(int? id);
     }
 }

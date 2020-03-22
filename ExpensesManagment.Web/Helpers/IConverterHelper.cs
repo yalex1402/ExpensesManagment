@@ -15,6 +15,10 @@ namespace ExpensesManagment.Web.Helpers
 
         Task<UserTripDetailViewModel> ToUserTripDetailViewModel(string id);
 
-        Task<TripEntity> ToTripEntity(TripViewModel model);
+        Task<TripEntity> ToAddTripEntity(TripViewModel model);
+
+        Task<TripEntity> ToEditTripEntity(TripViewModel model);
+
+        Task<TripViewModel> ToTripViewModel(TripEntity model);
     }
 }

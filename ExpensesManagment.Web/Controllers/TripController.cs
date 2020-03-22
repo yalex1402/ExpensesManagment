@@ -15,12 +15,15 @@ namespace ExpensesManagment.Web.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly IConverterHelper _converterHelper;
+        private readonly ITripHelper _tripHelper;
 
         public TripController(DataContext dataContext,
-            IConverterHelper converterHelper)
+            IConverterHelper converterHelper,
+            ITripHelper tripHelper)
         {
             _dataContext = dataContext;
             _converterHelper = converterHelper;
+            _tripHelper = tripHelper;
         }
 
         public async Task<IActionResult> UserTrip()
@@ -78,7 +81,7 @@ namespace ExpensesManagment.Web.Controllers
             if (ModelState.IsValid)
             {
                 UserEntity userEntity = await _dataContext.Users.FindAsync(model.UserId);
-                TripEntity tripEntity = await _converterHelper.ToTripEntity(model);
+                TripEntity tripEntity = await _converterHelper.ToAddTripEntity(model);
                 _dataContext.Add(tripEntity);
                 await _dataContext.SaveChangesAsync();
                 return RedirectToAction($"{nameof(UserTripDetail)}/{model.UserId}");
@@ -122,6 +125,38 @@ namespace ExpensesManagment.Web.Controllers
             _dataContext.Remove(userEntity);
             await _dataContext.SaveChangesAsync();
             return RedirectToAction($"{nameof(UserTrip)}");
+        }
+
+        public async Task<IActionResult> Edit (int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            TripEntity tripEntity = await _tripHelper.GetTripAsync(id);
+
+            if (tripEntity == null)
+            {
+                return NotFound();
+            }
+
+            TripViewModel tripViewModel = await _converterHelper.ToTripViewModel(tripEntity);
+
+            return View(tripViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(TripViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TripEntity tripEntity = await _converterHelper.ToEditTripEntity(model);
+                _dataContext.Update(tripEntity);
+                await _dataContext.SaveChangesAsync();
+                return RedirectToAction($"{nameof(UserTripDetail)}/{model.UserId}");
+            }
+            return View(model);
         }
     }
 }
