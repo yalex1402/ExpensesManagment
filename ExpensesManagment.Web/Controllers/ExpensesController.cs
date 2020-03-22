@@ -45,7 +45,9 @@ namespace ExpensesManagment.Web.Controllers
             {
                 return NotFound();
             }
-            ExpenseEntity model = await _dataContext.Expenses.Include(t => t.ExpenseType)
+            ExpenseEntity model = await _dataContext.Expenses
+                .Include(t => t.ExpenseType)
+                .Include(t => t.Trip)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (model == null)
             {

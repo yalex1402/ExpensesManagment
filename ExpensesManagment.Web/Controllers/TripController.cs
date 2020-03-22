@@ -238,5 +238,43 @@ namespace ExpensesManagment.Web.Controllers
             model.ExpensesType = _combosHelper.GetComboExpenses();
             return View(model);
         }
+
+        public async Task<IActionResult> DeleteExpense(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ExpenseEntity expense = await _dataContext.Expenses
+                .Include(e => e.Trip)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (expense == null)
+            {
+                return NotFound();
+            }
+
+            _dataContext.Expenses.Remove(expense);
+            await _dataContext.SaveChangesAsync();
+            return RedirectToAction($"{nameof(TripExpensesDetail)}/{expense.Trip.Id}");
+        }
+
+        public async Task<IActionResult> DetailsExpense(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ExpenseEntity model = await _dataContext.Expenses
+                .Include(t => t.ExpenseType)
+                .Include(t => t.Trip)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return View(model);
+        }
     }
 }

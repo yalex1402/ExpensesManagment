@@ -1,0 +1,55 @@
+﻿@model ExpensesManagment.Web.Data.Entities.ExpenseEntity
+
+@{
+    ViewData["Title"] = "Expense Details";
+}
+
+<h1>Expense Details</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-4">
+                    @if (!string.IsNullOrEmpty(Model.ExpenseType.LogoPath))
+                    {
+                        <img src="@Url.Content(Model.ExpenseType.LogoPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                    }
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="ExpenseType.Name" class="control-label"></label>
+                    <input asp-for="ExpenseType.Name" class="form-control" readonly />
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="DateToLocal" class="control-label"></label>
+                    <input asp-for="DateToLocal" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="Details" class="control-label"></label>
+                    <input asp-for="Details" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="Value" class="control-label"></label>
+                    <input asp-for="Value" class="form-control" readonly />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(Model.PicturePath))
+        {
+            <img src="@Url.Content(Model.PicturePath)" alt="Image" style="width:300px;height:300px;max-width: 100%; height: auto;" />
+        }
+    </div>
+</div>
+
+<div class="row">
+    <a asp-action="TripExpensesDetail" asp-route-id="@Model.Trip.Id" class="btn btn-primary"><i class="glyphicon glyphicon-menu-left"></i> Back to Expenses</a>
+    <a asp-action="EditExpense" asp-route-id="@Model.Id" class="btn btn-warning">Edit <i class="glyphicon glyphicon-pencil"></i></a>
+</div>
