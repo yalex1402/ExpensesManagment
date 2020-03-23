@@ -47,7 +47,7 @@ namespace ExpensesManagment.Web.Data
                 _dataContext.Add(new ExpenseTypeEntity { Name = "Oil", LogoPath = $"~/images/Expenses/Oil.png" });
                 _dataContext.Add(new ExpenseTypeEntity { Name = "Healthcare", LogoPath = $"~/images/Expenses/Healthcare.png" });
                 _dataContext.Add(new ExpenseTypeEntity { Name = "Phone", LogoPath = $"~/images/Expenses/Phone.png" });
-                _dataContext.Add(new ExpenseTypeEntity { Name = "Other"});
+                _dataContext.Add(new ExpenseTypeEntity { Name = "Other" });
             }
 
             await _dataContext.SaveChangesAsync();
@@ -77,6 +77,9 @@ namespace ExpensesManagment.Web.Data
 
                 await _userHelper.AddUserAsync(user, "123456");
                 await _userHelper.AddUserToRoleAsync(user, userType.ToString());
+                string token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                await _userHelper.ConfirmEmailAsync(user, token);
+
             }
 
             return user;

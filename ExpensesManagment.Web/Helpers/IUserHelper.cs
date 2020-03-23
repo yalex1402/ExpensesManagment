@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Web.Data.Entities;
 using ExpensesManagment.Web.Models;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Threading.Tasks;
 
 namespace ExpensesManagment.Web.Helpers
@@ -8,6 +9,8 @@ namespace ExpensesManagment.Web.Helpers
     public interface IUserHelper
     {
         Task<UserEntity> GetUserAsync(string email);
+
+        Task<UserEntity> GetUserAsync(Guid userId);
 
         Task<IdentityResult> AddUserAsync(UserEntity user, string password);
 
@@ -26,6 +29,13 @@ namespace ExpensesManagment.Web.Helpers
         Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword);
 
         Task<IdentityResult> UpdateUserAsync(UserEntity user);
+
+        Task<SignInResult> ValidatePasswordAsync(UserEntity user, string password);
+
+        Task<string> GenerateEmailConfirmationTokenAsync(UserEntity user);
+
+        Task<IdentityResult> ConfirmEmailAsync(UserEntity user, string token);
+
 
     }
 }
