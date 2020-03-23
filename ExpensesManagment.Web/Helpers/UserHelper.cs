@@ -1,4 +1,5 @@
-﻿using ExpensesManagment.Web.Data;
+﻿using ExpensesManagment.Common.Enums;
+using ExpensesManagment.Web.Data;
 using ExpensesManagment.Web.Data.Entities;
 using ExpensesManagment.Web.Models;
 using Microsoft.AspNetCore.Identity;
@@ -67,5 +68,43 @@ namespace ExpensesManagment.Web.Helpers
         {
             await _signInManager.SignOutAsync();
         }
+
+        public async Task<UserEntity> AddUserAsync(AddUserViewModel model, string path)
+        {
+            UserEntity userEntity = new UserEntity
+            {
+                
+                Document = model.Document,
+                Email = model.Username,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PicturePath = path,
+                PhoneNumber = model.PhoneNumber,
+                UserName = model.Username,
+                UserType = model.UserTypeId == 1 ? UserType.Manager : UserType.Employee
+            };
+
+            IdentityResult result = await _userManager.CreateAsync(userEntity, model.Password);
+            if (result != IdentityResult.Success)
+            {
+                return null;
+            }
+
+            UserEntity newUser = await GetUserAsync(model.Username);
+            await AddUserToRoleAsync(newUser, userEntity.UserType.ToString());
+            return newUser;
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(UserEntity user)
+        {
+            return await _userManager.UpdateAsync(user);
+        }
+
+
     }
 }
