@@ -1,4 +1,5 @@
-﻿using ExpensesManagment.Web.Data.Entities;
+﻿using ExpensesManagment.Common.Models;
+using ExpensesManagment.Web.Data.Entities;
 using ExpensesManagment.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,7 @@ namespace ExpensesManagment.Web.Helpers
         Task<TripEntity> ToEditTripEntity(TripViewModel model);
 
         Task<TripViewModel> ToTripViewModel(TripEntity model);
+
+        Task<TripResponse> ToTripResponse(TripEntity tripEntity);
     }
 }
