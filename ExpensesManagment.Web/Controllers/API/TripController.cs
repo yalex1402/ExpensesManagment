@@ -72,5 +72,7 @@ namespace ExpensesManagment.Web.Controllers.API
 
             return Ok(_converterHelper.ToTripResponse(trips));
         }
+
+
     }
 }

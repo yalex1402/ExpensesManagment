@@ -296,7 +296,7 @@ namespace ExpensesManagment.Web.Controllers
                     "ResetPassword",
                     "Account",
                     new { token = myToken }, protocol: HttpContext.Request.Scheme);
-                _mailHelper.SendMail(model.Email, "Taxi Password Reset", $"<h1>Expenses Managment Password Reset</h1>" +
+                _mailHelper.SendMail(model.Email, "Expenses Managment Password Reset", $"<h1>Expenses Managment Password Reset</h1>" +
                     $"To reset the password click in this link:</br></br>" +
                     $"<a href = \"{link}\">Reset Password</a>");
                 ViewBag.Message = "The instructions to recover your password has been sent to email.";
