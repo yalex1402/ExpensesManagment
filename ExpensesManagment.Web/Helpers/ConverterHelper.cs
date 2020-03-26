@@ -124,7 +124,19 @@ namespace ExpensesManagment.Web.Helpers
             };
         }
 
-        public async Task<TripResponse> ToTripResponse (TripEntity tripEntity)
+        public List<TripResponse> ToTripResponse(List<TripEntity> trips)
+        {
+            List<TripResponse> list = new List<TripResponse>();
+            
+            foreach(TripEntity tripEntity in trips)
+            {
+                list.Add(ToTripResponse(tripEntity));
+            }
+
+            return list;
+        }
+
+        public TripResponse ToTripResponse (TripEntity tripEntity)
         {
             return new TripResponse
             {

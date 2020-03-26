@@ -24,6 +24,8 @@ namespace ExpensesManagment.Web.Helpers
 
         Task<TripViewModel> ToTripViewModel(TripEntity model);
 
-        Task<TripResponse> ToTripResponse(TripEntity tripEntity);
+        TripResponse ToTripResponse(TripEntity tripEntity);
+
+        List<TripResponse> ToTripResponse(List<TripEntity> trips);
     }
 }
