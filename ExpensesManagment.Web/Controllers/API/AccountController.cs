@@ -22,16 +22,19 @@ namespace ExpensesManagment.Web.Controllers.API
         private readonly IUserHelper _userHelper;
         private readonly IImageHelper _imageHelper;
         private readonly IMailHelper _mailHelper;
+        private readonly IConverterHelper _converterHelper;
 
         public AccountController(DataContext dataContext,
             IUserHelper userHelper,
             IImageHelper imageHelper,
-            IMailHelper mailHelper)
+            IMailHelper mailHelper,
+            IConverterHelper converterHelper)
         {
             _dataContext = dataContext;
             _userHelper = userHelper;
             _imageHelper = imageHelper;
             _mailHelper = mailHelper;
+            _converterHelper = converterHelper;
         }
 
         [HttpPost]
@@ -216,6 +219,26 @@ namespace ExpensesManagment.Web.Controllers.API
                 IsSuccess = true,
                 Message = "The password has been changed successfully"
             });
+        }
+
+        [HttpPost]
+        [Route("GetUser")]
+        public async Task<IActionResult> GetUser([FromBody] EmailRequest emailRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            CultureInfo cultureInfo = new CultureInfo(emailRequest.CultureInfo);
+
+            UserEntity userEntity = await _userHelper.GetUserAsync(emailRequest.Email);
+            if (userEntity == null)
+            {
+                return NotFound("User doesn't exist");
+            }
+
+            return Ok(_converterHelper.ToUserResponse(userEntity));
         }
     }
 }

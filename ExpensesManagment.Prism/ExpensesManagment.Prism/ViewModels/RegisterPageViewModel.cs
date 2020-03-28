@@ -4,16 +4,14 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ExpensesManagment.Prism.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class RegisterPageViewModel : ViewModelBase
     {
-        public MainPageViewModel(INavigationService navigationService)
-            : base(navigationService)
+        public RegisterPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Title = "Main Page";
+            Title = "Register";
         }
     }
 }

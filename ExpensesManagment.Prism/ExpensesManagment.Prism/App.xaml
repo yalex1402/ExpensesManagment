@@ -5,7 +5,42 @@
              x:Class="ExpensesManagment.Prism.App">
 	<Application.Resources>
 
-		<!-- Application resource dictionary -->
+        <!-- Parameters -->
+        <x:String x:Key="UrlAPI">https://expensesmanagmentweb.azurewebsites.net/</x:String>
 
-	</Application.Resources>
+
+        <!-- Colors -->
+        <Color x:Key="ColorBackgroud">#1C2126</Color>
+        <Color x:Key="ColorPrimary">#F2F2F2</Color>
+        <Color x:Key="ColorSecondary">#707F8C</Color>
+        <Color x:Key="ColorDanger">#1E2759</Color>
+        <Color x:Key="ColorAccent">#182240</Color>
+        <Color x:Key="ColorFont">#F2F2F2</Color>
+        <Color x:Key="ColorFontInverse">#FFFFFF</Color>
+
+        <!-- Styles -->
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="TextColor" Value="{StaticResource ColorFontInverse}" />
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorFont}" />
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorFontInverse}" />
+        </Style>
+
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorSecondary}" />
+        </Style>
+
+        <Style x:Key="DangerButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorDanger}" />
+        </Style>
+
+    </Application.Resources>
 </prism:PrismApplication>
