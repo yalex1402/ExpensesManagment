@@ -1,5 +1,6 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
+using ExpensesManagment.Common.Services;
 using Newtonsoft.Json;
 using Prism.Navigation;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ namespace ExpensesManagment.Prism.ViewModels
     public class ExpensesMasterDetailPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
+        private readonly IApiService _apiService;
         private UserResponse _user;
 
-        public ExpensesMasterDetailPageViewModel(INavigationService navigationService) : base(navigationService)
+        public ExpensesMasterDetailPageViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
         {
             _navigationService = navigationService;
+            _apiService = apiService;
             LoadUser();
             LoadMenus();
         }
@@ -61,7 +64,7 @@ namespace ExpensesManagment.Prism.ViewModels
             };
 
             Menus = new ObservableCollection<MenuItemViewModel>(
-                menus.Select(m => new MenuItemViewModel(_navigationService)
+                menus.Select(m => new MenuItemViewModel(_navigationService, _apiService)
                 {
                     Icon = m.Icon,
                     PageName = m.PageName,
