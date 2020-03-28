@@ -17,6 +17,10 @@ namespace ExpensesManagment.Common.Models
 
         public string LastName { get; set; }
 
+        public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
+                    ? "https://expensesmanagmentweb.azurewebsites.net//images/noimage.png"
+                    : $"https://expensesmanagmentweb.azurewebsites.net{PicturePath.Substring(1)}";
+
         public string PicturePath { get; set; }
 
         public UserType UserType { get; set; }

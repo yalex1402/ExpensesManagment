@@ -1,6 +1,8 @@
-﻿using ExpensesManagment.Common.Models;
+﻿using ExpensesManagment.Common.Helpers;
+using ExpensesManagment.Common.Models;
 using Prism.Commands;
 using Prism.Navigation;
+using System;
 
 namespace ExpensesManagment.Prism.ViewModels
 {
@@ -18,6 +20,13 @@ namespace ExpensesManagment.Prism.ViewModels
 
         private async void SelectMenuAsync()
         {
+            if (PageName == "LoginPage" && Settings.IsLogin)
+            {
+                Settings.IsLogin = false;
+                Settings.User = null;
+                Settings.Token = null;
+            }
+
             await _navigationService.NavigateAsync($"/ExpensesMasterDetailPage/NavigationPage/{PageName}");
         }
     }

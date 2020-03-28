@@ -143,7 +143,7 @@ namespace ExpensesManagment.Prism.ViewModels
                 {"trips" , Trips}
             };
             
-            await _navigationService.NavigateAsync("ExpensesMasterDetailPage/NavigationPage/TripsPage",parameters);
+            await _navigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage",parameters);
             Password = string.Empty;
 
         }

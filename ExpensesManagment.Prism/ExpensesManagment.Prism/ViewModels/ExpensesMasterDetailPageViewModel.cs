@@ -1,4 +1,6 @@
-﻿using ExpensesManagment.Common.Models;
+﻿using ExpensesManagment.Common.Helpers;
+using ExpensesManagment.Common.Models;
+using Newtonsoft.Json;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,14 +11,30 @@ namespace ExpensesManagment.Prism.ViewModels
     public class ExpensesMasterDetailPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
+        private UserResponse _user;
 
         public ExpensesMasterDetailPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             _navigationService = navigationService;
+            LoadUser();
             LoadMenus();
         }
 
         public ObservableCollection<MenuItemViewModel> Menus { get; set; }
+
+        public UserResponse User
+        {
+            get => _user;
+            set => SetProperty(ref _user, value);
+        }
+
+        private void LoadUser()
+        {
+            if (Settings.IsLogin)
+            {
+                User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            }
+        }
 
         private void LoadMenus()
         {
@@ -26,7 +44,7 @@ namespace ExpensesManagment.Prism.ViewModels
                 {
                     Icon = "ic_local_airport",
                     PageName = "TripsPage",
-                    Title = "My Trips"
+                    Title = "My trips"
                 },
                 new Menu
                 {
@@ -38,7 +56,7 @@ namespace ExpensesManagment.Prism.ViewModels
                 {
                     Icon = "ic_exit_to_app",
                     PageName = "LoginPage",
-                    Title = "Login"
+                    Title = Settings.IsLogin? "Logout" : "Login"
                 }
             };
 
