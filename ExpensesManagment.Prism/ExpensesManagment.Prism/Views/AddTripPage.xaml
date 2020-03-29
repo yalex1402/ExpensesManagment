@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ExpensesManagment.Prism.Views.AddTripPage"
+             Title="{Binding Title}"
+             BackgroundColor="{StaticResource ColorBackgroud}">
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Padding="5">
+            <ScrollView>
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Text="User"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                               Text="{Binding User.Email}"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Row="3"
+                               Grid.Column="0"
+                               Text="City Visited"
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Row="3"
+                               Grid.Column="1"
+                               Placeholder="Entry the city you've been visited"
+                               Text="{Binding Trip.CityVisited}"/>
+                        <Label Grid.Row="4"
+                               Grid.Column="0"
+                               Text="Start Date"
+                               VerticalOptions="Center"/>
+                        <DatePicker Grid.Row="4"
+                               Grid.Column="1"
+                               Format="yyyy-MM-dd"
+                               TextColor="{StaticResource ColorFontInverse}"
+                               Date="{Binding Trip.StartDate}"/>
+                        <Label Grid.Row="5"
+                               Grid.Column="0"
+                               Text="End Date"
+                               VerticalOptions="Center"/>
+                        <DatePicker Grid.Row="5"
+                               Grid.Column="1"
+                               Format="yyyy-MM-dd"
+                               TextColor="{StaticResource ColorFontInverse}"
+                               Date="{Binding Trip.EndDate}"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <Button Command="{Binding AddCommand}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Text="Add Trip"
+                    BackgroundColor="{StaticResource ColorDanger}"/>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="Loading..."
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
+    
+</ContentPage>

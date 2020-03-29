@@ -58,6 +58,12 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Button Command="{Binding AddCommand}"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    BackgroundColor="{StaticResource ColorDanger}"
+                    ImageSource="ic_action_add_location">
+            </Button>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
                                         AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"

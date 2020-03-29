@@ -29,5 +29,9 @@ namespace ExpensesManagment.Web.Helpers
         List<TripResponse> ToTripResponse(List<TripEntity> trips);
 
         UserResponse ToUserResponse(UserEntity userEntity);
+
+        Task<TripEntity> ToTripEntity(TripRequest tripRequest);
+
+        Task<ExpenseEntity> ToExpenseEntity(ExpenseRequest expenseRequest);
     }
 }

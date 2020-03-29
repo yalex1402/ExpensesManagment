@@ -1,5 +1,6 @@
 ﻿using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -14,6 +15,7 @@ namespace ExpensesManagment.Prism.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private List<TripResponse> _trips;
+        private DelegateCommand _addCommand;
         private bool _isRunning;
 
         public TripsPageViewModel(INavigationService navigationService,
@@ -24,6 +26,8 @@ namespace ExpensesManagment.Prism.ViewModels
             Title = "Trips";
             _isRunning = false;
         }
+
+        public DelegateCommand AddCommand => _addCommand ?? (_addCommand = new DelegateCommand(AddTripAsync));
 
         public bool IsRunning
         {
@@ -45,6 +49,11 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 Trips = parameters.GetValue<List<TripResponse>>("trips");
             }
+        }
+
+        public async void AddTripAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(AddTripPage));
         }
 
     }

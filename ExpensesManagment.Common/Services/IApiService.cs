@@ -17,5 +17,9 @@ namespace ExpensesManagment.Common.Services
 
         Task<Response> GetTripsByUser(string urlBase, string servicePrefix, string controller, string tokenType,string accessToken, MyTripsRequest myTripsRequest);
 
+        Task<Response> AddTrip(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, TripRequest tripRequest);
+
+        Task<Response> AddExpense(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, ExpenseRequest expenseRequest);
+
     }
 }

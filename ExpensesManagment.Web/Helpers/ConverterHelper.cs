@@ -1,9 +1,11 @@
 ﻿
+using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Web.Data;
 using ExpensesManagment.Web.Data.Entities;
 using ExpensesManagment.Web.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -188,6 +190,32 @@ namespace ExpensesManagment.Web.Helpers
                 Name = type.Name,
                 LogoPath = type.LogoPath
             };
+        }
+
+        public async Task<TripEntity> ToTripEntity (TripRequest tripRequest)
+        {
+            UserEntity userEntity = await _userHelper.GetUserAsync(tripRequest.UserEmail);
+            return new TripEntity
+            {
+                CityVisited = tripRequest.CityVisited,
+                StartDate = tripRequest.StartDate,
+                EndDate = tripRequest.EndDate,
+                User = userEntity
+            };
+        }
+
+        public async Task<ExpenseEntity> ToExpenseEntity (ExpenseRequest expenseRequest)
+        {
+            TripEntity tripEntity = await _tripHelper.GetTripAsync(expenseRequest.TripId);
+            return new ExpenseEntity
+            {
+                Details = expenseRequest.Details,
+                Date = expenseRequest.Date,
+                Trip = tripEntity,
+                User = await _userHelper.GetUserAsync(tripEntity.User.Email),
+                Value = expenseRequest.Value,
+                ExpenseType = await _expenseHelper.GetExpenseTypeAsync(expenseRequest.ExpenseTypeId)
+        };
         }
     }
 }
