@@ -11,10 +11,17 @@ namespace ExpensesManagment.Common.Helpers
         private const string _user = "user";
         private const string _token = "token";
         private const string _isLogin = "isLogin";
+        private const string _trips = "trips";
         private static readonly string _stringDefault = string.Empty;
         private static readonly bool _boolDefault = false;
 
         private static ISettings AppSettings => CrossSettings.Current;
+
+        public static string Trips
+        {
+            get => AppSettings.GetValueOrDefault(_trips, _stringDefault);
+            set => AppSettings.AddOrUpdateValue(_trips, value);
+        }
 
         public static string User
         {

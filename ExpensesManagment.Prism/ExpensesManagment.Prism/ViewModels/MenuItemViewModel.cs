@@ -41,17 +41,8 @@ namespace ExpensesManagment.Prism.ViewModels
 
             if (PageName == "TripsPage" && Settings.IsLogin)
             {
-                UserResponse userResponse = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
-                MyTripsRequest myTripsRequest = new MyTripsRequest
-                {
-                    UserId = userResponse.Id,
-                    StartDate = DateTime.Parse("2020-01-01"),
-                    EndDate = DateTime.UtcNow
-                };
-                string url = App.Current.Resources["UrlAPI"].ToString();
-                TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
-                Response response = await _apiService.GetTripsByUser(url, "api", "/Trip/GetTrips", "bearer", token.Token, myTripsRequest);
-                List<TripResponse> trips = (List<TripResponse>)response.Result;
+                
+                List<TripResponse> trips = JsonConvert.DeserializeObject<List<TripResponse>>(Settings.Trips);
                 NavigationParameters parameters = new NavigationParameters
                 {
                     {"trips" , trips}

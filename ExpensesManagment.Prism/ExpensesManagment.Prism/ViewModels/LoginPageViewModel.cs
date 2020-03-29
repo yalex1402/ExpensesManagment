@@ -138,6 +138,8 @@ namespace ExpensesManagment.Prism.ViewModels
             Response response3 = await _apiService.GetTripsByUser(url, "api", "/Trip/GetTrips", "bearer", token.Token, myTripsRequest);
             Trips = (List<TripResponse>)response3.Result;
 
+            Settings.Trips = JsonConvert.SerializeObject(Trips);
+
             NavigationParameters parameters = new NavigationParameters
             {
                 {"trips" , Trips}

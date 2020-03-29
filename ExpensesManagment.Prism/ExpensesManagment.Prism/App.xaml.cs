@@ -1,11 +1,16 @@
-﻿using Prism;
-using Prism.Ioc;
+﻿using ExpensesManagment.Common.Helpers;
+using ExpensesManagment.Common.Models;
+using ExpensesManagment.Common.Services;
 using ExpensesManagment.Prism.ViewModels;
 using ExpensesManagment.Prism.Views;
+using Newtonsoft.Json;
+using Prism;
+using Prism.Ioc;
+using Prism.Navigation;
+using Syncfusion.Licensing;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ExpensesManagment.Common.Services;
-using Syncfusion.Licensing;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ExpensesManagment.Prism
@@ -20,6 +25,17 @@ namespace ExpensesManagment.Prism
         {
             SyncfusionLicenseProvider.RegisterLicense("MjE2NDM0QDMxMzcyZTM0MmUzMGhXSFduR2V3NzNDY2xGUTVRUk1YNFJjajZTQmV4c3A2ZmlvRjBjYTEwb0E9;MjE2NDM1QDMxMzcyZTM0MmUzMGVpZWhNS1FFQ2c4M1lkaFJFTEhuNjZXbThTZnMrbTNPSUJkRVUwRUlnaFk9");
             InitializeComponent();
+            if (Settings.IsLogin)
+            {
+                List<TripResponse> trips = JsonConvert.DeserializeObject<List<TripResponse>>(Settings.Trips);
+                NavigationParameters parameters = new NavigationParameters
+                {
+                    {"trips" , trips}
+                };
+
+                await NavigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage", parameters);
+                return;
+            }
             await NavigationService.NavigateAsync("ExpensesMasterDetailPage/NavigationPage/LoginPage");
         }
 
