@@ -86,11 +86,7 @@ namespace ExpensesManagment.Prism.ViewModels
             IsEnabled = true;
             List<TripResponse> trips = (List<TripResponse>)response.Result;
             Settings.Trips = JsonConvert.SerializeObject(trips);
-            NavigationParameters parameters = new NavigationParameters
-            {
-                {"trips", trips}
-            };
-            await _navigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage", parameters);
+            await _navigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage");
         }
 
         private async Task<bool> ValidateDataAsync()

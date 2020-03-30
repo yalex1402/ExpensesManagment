@@ -90,7 +90,7 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet conection", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
                 return;
             }
 
@@ -140,12 +140,7 @@ namespace ExpensesManagment.Prism.ViewModels
 
             Settings.Trips = JsonConvert.SerializeObject(Trips);
 
-            NavigationParameters parameters = new NavigationParameters
-            {
-                {"trips" , Trips}
-            };
-            
-            await _navigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage",parameters);
+            await _navigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage");
             Password = string.Empty;
 
         }

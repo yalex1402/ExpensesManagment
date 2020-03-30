@@ -26,14 +26,8 @@ namespace ExpensesManagment.Prism
             SyncfusionLicenseProvider.RegisterLicense("MjE2NDM0QDMxMzcyZTM0MmUzMGhXSFduR2V3NzNDY2xGUTVRUk1YNFJjajZTQmV4c3A2ZmlvRjBjYTEwb0E9;MjE2NDM1QDMxMzcyZTM0MmUzMGVpZWhNS1FFQ2c4M1lkaFJFTEhuNjZXbThTZnMrbTNPSUJkRVUwRUlnaFk9");
             InitializeComponent();
             if (Settings.IsLogin)
-            {
-                List<TripResponse> trips = JsonConvert.DeserializeObject<List<TripResponse>>(Settings.Trips);
-                NavigationParameters parameters = new NavigationParameters
-                {
-                    {"trips" , trips}
-                };
-                
-                await NavigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage", parameters);
+            {   
+                await NavigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage");
                 return;
             }
             await NavigationService.NavigateAsync("ExpensesMasterDetailPage/NavigationPage/LoginPage");
@@ -50,6 +44,7 @@ namespace ExpensesManagment.Prism
             containerRegistry.RegisterForNavigation<ExpensesMasterDetailPage, ExpensesMasterDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<ModifyUserPage, ModifyUserPageViewModel>();
             containerRegistry.RegisterForNavigation<AddTripPage, AddTripPageViewModel>();
+            containerRegistry.RegisterForNavigation<TripDetailPage, TripDetailPageViewModel>();
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using ExpensesManagment.Common.Models;
+﻿using ExpensesManagment.Common.Helpers;
+using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
 using ExpensesManagment.Prism.Views;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -14,7 +16,7 @@ namespace ExpensesManagment.Prism.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
-        private List<TripResponse> _trips;
+        private List<TripItemViewModel> _trips;
         private DelegateCommand _addCommand;
         private bool _isRunning;
 
@@ -25,6 +27,7 @@ namespace ExpensesManagment.Prism.ViewModels
             _apiService = apiService;
             Title = "Trips";
             _isRunning = false;
+            LoadMyTrips();
         }
 
         public DelegateCommand AddCommand => _addCommand ?? (_addCommand = new DelegateCommand(AddTripAsync));
@@ -35,25 +38,42 @@ namespace ExpensesManagment.Prism.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
-        public List<TripResponse> Trips
+        public List<TripItemViewModel> Trips
         {
             get => _trips;
             set => SetProperty(ref _trips, value);
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-
-            if (parameters.ContainsKey("trips"))
-            {
-                Trips = parameters.GetValue<List<TripResponse>>("trips");
-            }
-        }
-
         public async void AddTripAsync()
         {
             await _navigationService.NavigateAsync(nameof(AddTripPage));
+        }
+
+        private async void LoadMyTrips()
+        {
+            IsRunning = true;
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                IsRunning = false;
+                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                return;
+            }
+
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+
+            List<TripItemViewModel> trips = JsonConvert.DeserializeObject<List<TripItemViewModel>>(Settings.Trips);
+            IsRunning = false;
+            Trips = trips.Select(t => new TripItemViewModel(_navigationService)
+            {
+                CityVisited = t.CityVisited,
+                StartDate = t.StartDate,
+                EndDate = t.EndDate,
+                Id = t.Id,
+                Expenses = t.Expenses,
+                User = t.User
+            }).ToList();
         }
 
     }
