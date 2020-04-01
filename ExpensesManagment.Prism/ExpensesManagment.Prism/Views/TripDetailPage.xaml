@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.TripDetailPage"
              Title="{Binding Title}"
@@ -12,22 +13,113 @@
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All" 
                      Padding="5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".5"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
+            <StackLayout>
+                <Label FontAttributes="Bold"
+                       FontSize="Subtitle"
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource ColorFontInverse}"
+                       Text="{Binding Trip.CityVisited}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal"
+                                 Grid.Row="0"
+                                 Grid.Column="0">
+                        <Label FontAttributes="Bold"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource ColorFontInverse}"
+                       Text="Start Date:"/>
+
+                        <Label FontAttributes="Bold"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource ColorFontInverse}"
+                       Text="{Binding Trip.StartDateLocal, StringFormat='{0:yyyy-MM-dd}'}"/>
+                    </StackLayout>
+                    <Button Grid.Row="0"
+                            Grid.Column="1"
+                            Command="{Binding EditTripCommand}"
+                            ImageSource="ic_edit"
+                            HorizontalOptions="End"
+                            VerticalOptions="End"/>
+                    
+                    <StackLayout Orientation="Horizontal"
+                                 Grid.Row="1"
+                                 Grid.Column="0">
+                        <Label FontAttributes="Bold"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource ColorFontInverse}"
+                       Text="End Date:"/>
+
+                        <Label FontAttributes="Bold"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource ColorFontInverse}"
+                       Text="{Binding Trip.EndDateLocal, StringFormat='{0:yyyy-MM-dd}'}"/>
+                    </StackLayout>
+                    <Button Grid.Row="1"
+                            Grid.Column="1"
+                            Command="{Binding DeleteTripCommand}"
+                            BackgroundColor="{StaticResource ColorDanger}"
+                            ImageSource="ic_delete_forever"
+                            HorizontalOptions="End"
+                            VerticalOptions="End"/>
+                </Grid>
+            </StackLayout>
+            
+            <CollectionView ItemsSource="{Binding Expenses}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{StaticResource ColorSecondary}"
+                               CornerRadius="10">
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ffimageloading:CachedImage Grid.Column="0"
+                                                            Aspect="AspectFill"
+                                                            Source="{Binding Type.LogoFullPath}" 
+                                                            CacheDuration= "50"
+                                                            Margin="5"
+                                                            RetryCount= "3"
+                                                            RetryDelay= "600"
+                                                            WidthRequest="100"/>
+                                <StackLayout Grid.Column="1"
+                                             VerticalOptions="Center">
+                                    <Label Text="{Binding Type.Name}" 
+                                           FontAttributes="Bold"
+                                           FontSize="Medium"
+                                           LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Value, StringFormat='{0:#.00}'}"
+                                           LineBreakMode="TailTruncation"
+                                           FontAttributes="Bold" 
+                                           VerticalOptions="End" />
+                                </StackLayout>
+                                <Image Grid.Column="2" 
+                                       Source="ic_more_vert"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
                                     AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                 	                AbsoluteLayout.LayoutFlags="All"
-                	                BackgroundColor="{StaticResource ColorPrimary}"
+                	                BackgroundColor="{StaticResource ColorAccent}"
                 	                HorizontalOptions="Center"
                 	                TextColor="{StaticResource ColorFontInverse}"
                 	                IsVisible="{Binding IsRunning}"
