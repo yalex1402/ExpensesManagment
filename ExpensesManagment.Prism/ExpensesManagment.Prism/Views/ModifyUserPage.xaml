@@ -76,7 +76,7 @@
                                Grid.Column="0"
                                Text="Phone"
                                VerticalOptions="Center"/>
-                        <Entry Grid.Row="5" 
+                        <Entry Grid.Row="3" 
                                Grid.Column="1"
                                Keyboard="Telephone"
                                Placeholder="Entry your phone number"

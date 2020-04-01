@@ -2,6 +2,7 @@
 using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Views;
 using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -28,6 +29,7 @@ namespace ExpensesManagment.Prism.ViewModels
         private MediaFile _file;
         private DelegateCommand _changeImageCommand;
         private DelegateCommand _saveCommand;
+        private DelegateCommand _changePasswordCommand;
 
         public ModifyUserPageViewModel(INavigationService navigationService, 
             IFilesHelper filesHelper, 
@@ -46,6 +48,8 @@ namespace ExpensesManagment.Prism.ViewModels
         public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
 
         public DelegateCommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(SaveAsync));
+
+        public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePasswordAsync));
 
         public ImageSource Image
         {
@@ -192,6 +196,12 @@ namespace ExpensesManagment.Prism.ViewModels
                     return stream;
                 });
             }
+
+        }
+
+        private async void ChangePasswordAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
         }
     }
 
