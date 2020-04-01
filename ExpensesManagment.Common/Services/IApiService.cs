@@ -21,6 +21,7 @@ namespace ExpensesManagment.Common.Services
 
         Task<Response> AddExpense(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, ExpenseRequest expenseRequest);
 
+        Task<Response> RecoverPasswordAsync(string urlBase, string servicePrefix, string controller, EmailRequest emailRequest);
 
     }
 }
