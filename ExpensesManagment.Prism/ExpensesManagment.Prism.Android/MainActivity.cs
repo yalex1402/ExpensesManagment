@@ -24,6 +24,7 @@ namespace ExpensesManagment.Prism.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             new SfBusyIndicatorRenderer();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
             LoadApplication(new App(new AndroidInitializer()));
         }
     }

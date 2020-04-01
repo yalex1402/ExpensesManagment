@@ -1,5 +1,7 @@
-﻿using ExpensesManagment.Common.Models;
+﻿using ExpensesManagment.Common.Helpers;
+using ExpensesManagment.Common.Models;
 using ExpensesManagment.Prism.Views;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
@@ -27,6 +29,7 @@ namespace ExpensesManagment.Prism.ViewModels
                 { "trip", this }
             };
 
+            Settings.TripSelected = JsonConvert.SerializeObject(this);
             await _navigationService.NavigateAsync(nameof(TripDetailPage), parameters);
         }
     }

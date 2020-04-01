@@ -7,6 +7,7 @@
 
         <!-- Parameters -->
         <x:String x:Key="UrlAPI">https://expensesmanagmentweb.azurewebsites.net/</x:String>
+        <x:String x:Key="UrlNoImage">https://expensesmanagmentweb.azurewebsites.net/images/noimage.png</x:String>
 
 
         <!-- Colors -->

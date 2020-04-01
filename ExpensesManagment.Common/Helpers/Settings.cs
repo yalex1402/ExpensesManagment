@@ -12,6 +12,7 @@ namespace ExpensesManagment.Common.Helpers
         private const string _token = "token";
         private const string _isLogin = "isLogin";
         private const string _trips = "trips";
+        private const string _tripSelected = "tripSelected";
         private static readonly string _stringDefault = string.Empty;
         private static readonly bool _boolDefault = false;
 
@@ -21,6 +22,12 @@ namespace ExpensesManagment.Common.Helpers
         {
             get => AppSettings.GetValueOrDefault(_trips, _stringDefault);
             set => AppSettings.AddOrUpdateValue(_trips, value);
+        }
+
+        public static string TripSelected
+        {
+            get => AppSettings.GetValueOrDefault(_tripSelected, _stringDefault);
+            set => AppSettings.AddOrUpdateValue(_tripSelected, value);
         }
 
         public static string User
