@@ -1,7 +1,9 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Views;
 using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,10 +15,14 @@ namespace ExpensesManagment.Prism.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
+        private static ExpensesMasterDetailPageViewModel _instance;
         private UserResponse _user;
+        private DelegateCommand _modifyUserCommand;
 
-        public ExpensesMasterDetailPageViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
+        public ExpensesMasterDetailPageViewModel(INavigationService navigationService, 
+            IApiService apiService) : base(navigationService)
         {
+            _instance = this;
             _navigationService = navigationService;
             _apiService = apiService;
             LoadUser();
@@ -25,11 +31,41 @@ namespace ExpensesManagment.Prism.ViewModels
 
         public ObservableCollection<MenuItemViewModel> Menus { get; set; }
 
+        public DelegateCommand ModifyUserCommand => _modifyUserCommand ?? (_modifyUserCommand = new DelegateCommand(ModifyUserAsync));
+
         public UserResponse User
         {
             get => _user;
             set => SetProperty(ref _user, value);
         }
+        public static ExpensesMasterDetailPageViewModel GetInstance()
+        {
+            return _instance;
+        }
+
+        public async void ReloadUser()
+        {
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                return;
+            }
+
+            UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            EmailRequest emailRequest = new EmailRequest
+            {
+                CultureInfo = "es",
+                Email = user.Email
+            };
+
+            Response response = await _apiService.GetUserByEmail(url, "api", "/Account/GetUser", "bearer", token.Token, emailRequest);
+            UserResponse userResponse = (UserResponse)response.Result;
+            Settings.User = JsonConvert.SerializeObject(userResponse);
+            LoadUser();
+        }
+
 
         private void LoadUser()
         {
@@ -71,6 +107,12 @@ namespace ExpensesManagment.Prism.ViewModels
                     Title = m.Title
                 }).ToList());
         }
+
+        private async void ModifyUserAsync()
+        {
+            await _navigationService.NavigateAsync($"/ExpensesMasterDetailPage/NavigationPage/{nameof(ModifyUserPage)}");
+        }
+
     }
 
 }
