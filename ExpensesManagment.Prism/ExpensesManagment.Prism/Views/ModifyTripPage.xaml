@@ -41,6 +41,7 @@
                                VerticalOptions="Center"/>
                         <DatePicker Grid.Row="1"
                                Grid.Column="1"
+                               Format="yyyy-MM-dd"
                                TextColor="{StaticResource ColorFontInverse}"
                                Date="{Binding Trip.StartDate}"/>
 
@@ -50,6 +51,7 @@
                                VerticalOptions="Center"/>
                         <DatePicker Grid.Row="2"
                                Grid.Column="1"
+                               Format="yyyy-MM-dd"
                                TextColor="{StaticResource ColorFontInverse}"
                                Date="{Binding Trip.EndDate}"/>
 

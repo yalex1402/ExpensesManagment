@@ -2,9 +2,70 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.DeleteTripPage"
              Title="{Binding Title}"
              BackgroundColor="{StaticResource ColorBackgroud}">
-  
+
+    <ScrollView>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+        	             Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0"
+                	       Grid.Row="0"
+                           FontSize="Subtitle"
+                           FontAttributes="Bold"
+                	       Text="Do you want to delete the trip:"
+                	       VerticalOptions="Center"/>
+
+                    <Label Grid.Column="1"
+                	       Grid.Row="0"
+                           FontSize="Medium"
+                           FontAttributes="Italic"
+                	       Text="{Binding Trip.CityVisited}"
+                	       VerticalOptions="Center"/>
+
+                    <Label Grid.Column="0"
+                	       Grid.Row="1"
+                           FontSize="Subtitle"
+                           FontAttributes="Bold"
+                	       Text="Write your email to confirm"
+                	       VerticalOptions="Center"/>
+
+                    <Entry Grid.Column="1"
+                	       Grid.Row="1"
+                	       Placeholder="email"
+                           Text="{Binding Email}"/>
+                    
+                </Grid>
+
+                <Button Command="{Binding DeleteTripCommand}"
+            	        IsEnabled="{Binding IsEnabled}"
+            	        Text="Delete Trip"
+                        VerticalOptions="EndAndExpand"/>
+
+            </StackLayout>
+
+            <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
+                                           AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                       AbsoluteLayout.LayoutFlags="All"
+                	                       BackgroundColor="{StaticResource ColorAccent}"
+                	                       HorizontalOptions="Center"
+                	                       TextColor="{StaticResource ColorFontInverse}"
+                	                       IsVisible="{Binding IsRunning}"
+                	                       Title="Loading..."
+                	                       VerticalOptions="Center"
+                	                       ViewBoxWidth="80"
+                	                       ViewBoxHeight="80" />
+        </AbsoluteLayout>
+    </ScrollView>
+
 </ContentPage>

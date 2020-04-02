@@ -27,5 +27,7 @@ namespace ExpensesManagment.Common.Services
 
         Task<Response> ChangePasswordAsync(string urlBase, string servicePrefix, string controller, ChangePasswordRequest changePasswordRequest, string tokenType, string accessToken);
 
+        Task<Response> DeleteTripAsync(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken);
+
     }
 }
