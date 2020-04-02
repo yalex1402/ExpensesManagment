@@ -132,5 +132,51 @@ namespace ExpensesManagment.Web.Controllers.API
             
             return Ok(_converterHelper.ToTripResponse(tripEntity));
         }
+
+        [HttpPut]
+        public async Task<IActionResult>ModifyTrip([FromBody] TripRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            TripEntity tripEntity = await _tripHelper.GetTripAsync(request.Id);
+
+            if (tripEntity == null)
+            {
+                return BadRequest("Trip doesn't exist");
+            }
+
+            tripEntity.CityVisited = request.CityVisited;
+            tripEntity.StartDate = request.StartDate;
+            tripEntity.EndDate = request.EndDate;
+
+            _dataContext.Trips.Update(tripEntity);
+            await _dataContext.SaveChangesAsync();
+            
+            TripEntity updatedTrip = await _tripHelper.GetTripAsync(request.Id);
+            return Ok(_converterHelper.ToTripResponse(updatedTrip));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult>DeleteTrip([FromRoute]int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            TripEntity tripEntity = await _tripHelper.GetTripAsync(id);
+
+            if (tripEntity == null)
+            {
+                return BadRequest("Trip doesn't exist");
+            }
+
+            _dataContext.Trips.Remove(tripEntity);
+            await _dataContext.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
