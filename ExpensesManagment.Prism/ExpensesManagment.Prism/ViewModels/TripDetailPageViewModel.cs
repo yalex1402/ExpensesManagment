@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -78,12 +79,12 @@ namespace ExpensesManagment.Prism.ViewModels
 
         public async void EditTripAsync()
         {
-
+            await _navigationService.NavigateAsync(nameof(ModifyTripPage));
         }
 
         public async void DeleteTripAsync()
         {
-
+            await _navigationService.NavigateAsync(nameof(DeleteTripPage));
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
