@@ -21,6 +21,7 @@ namespace ExpensesManagment.Prism.ViewModels
         private bool _isRunning;
         private DelegateCommand _editTripCommand;
         private DelegateCommand _deleteTripCommand;
+        private DelegateCommand _addExpenseCommand;
 
         public TripDetailPageViewModel(INavigationService navigationService,
             IApiService apiService) : base(navigationService)
@@ -35,6 +36,8 @@ namespace ExpensesManagment.Prism.ViewModels
         public DelegateCommand EditTripCommand => _editTripCommand ?? (_editTripCommand = new DelegateCommand(EditTripAsync));
 
         public DelegateCommand DeleteTripCommand => _deleteTripCommand ?? (_deleteTripCommand = new DelegateCommand(DeleteTripAsync));
+
+        public DelegateCommand AddExpenseCommand => _addExpenseCommand ?? (_addExpenseCommand = new DelegateCommand(AddExpenseAsync));
 
         public TripResponse Trip
         {
@@ -85,6 +88,11 @@ namespace ExpensesManagment.Prism.ViewModels
         public async void DeleteTripAsync()
         {
             await _navigationService.NavigateAsync(nameof(DeleteTripPage));
+        }
+
+        public async void AddExpenseAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(AddExpensePage));
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

@@ -115,6 +115,12 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Button Command="{Binding AddExpenseCommand}"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    BackgroundColor="{StaticResource ColorDanger}"
+                    ImageSource="ic_add_shopping_cart">
+            </Button>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
                                     AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"

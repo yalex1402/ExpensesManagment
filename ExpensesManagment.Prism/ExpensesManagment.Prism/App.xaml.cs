@@ -51,6 +51,7 @@ namespace ExpensesManagment.Prism
             containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<ModifyTripPage, ModifyTripPageViewModel>();
             containerRegistry.RegisterForNavigation<DeleteTripPage, DeleteTripPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddExpensePage, AddExpensePageViewModel>();
         }
     }
 }
