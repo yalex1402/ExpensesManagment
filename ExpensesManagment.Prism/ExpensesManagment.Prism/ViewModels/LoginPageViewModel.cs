@@ -135,7 +135,7 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 UserId = userResponse.Id,
                 StartDate = DateTime.Parse("2020-01-01"),
-                EndDate = DateTime.UtcNow
+                EndDate = DateTime.Parse("2021-12-31")
             };
 
             Response response3 = await _apiService.GetTripsByUser(url, "api", "/Trip/GetTrips", "bearer", token.Token, myTripsRequest);

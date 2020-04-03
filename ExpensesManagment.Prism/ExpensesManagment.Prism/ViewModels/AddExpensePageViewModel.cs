@@ -134,6 +134,18 @@ namespace ExpensesManagment.Prism.ViewModels
             IsRunning = false;
             IsEnabled = true;
 
+            MyTripsRequest myTripsRequest = new MyTripsRequest
+            {
+                UserId = _user.Id,
+                StartDate = DateTime.Parse("2020-01-01"),
+                EndDate = DateTime.Parse("2021-12-31")
+            };
+
+            Response response3 = await _apiService.GetTripsByUser(url, "api", "/Trip/GetTrips", "bearer", token.Token, myTripsRequest);
+            List<TripResponse> Trips = (List<TripResponse>)response3.Result;
+
+            Settings.Trips = JsonConvert.SerializeObject(Trips);
+
             TripResponse trip = (TripResponse)response.Result;
             
             NavigationParameters parameters = new NavigationParameters
@@ -142,7 +154,7 @@ namespace ExpensesManagment.Prism.ViewModels
             };
 
             Settings.TripSelected = JsonConvert.SerializeObject(trip);
-            await _navigationService.NavigateAsync(nameof(TripDetailPage), parameters);
+            await _navigationService.NavigateAsync($"/ExpensesMasterDetailPage/NavigationPage/{nameof(TripDetailPage)}", parameters);
         }
 
         private async Task<bool> ValidateDataAsync()

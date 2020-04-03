@@ -33,6 +33,7 @@ namespace ExpensesManagment.Web.Helpers
             TripEntity tripEntity = await _dataContext.Trips
                 .Include(t => t.User)
                 .Include(t => t.Expenses)
+                .ThenInclude (e => e.ExpenseType)
                 .FirstOrDefaultAsync(t => t.Id == id);
             return tripEntity;
         }

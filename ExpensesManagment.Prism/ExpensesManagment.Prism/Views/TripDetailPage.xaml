@@ -82,7 +82,7 @@
                                CornerRadius="10">
                             <Grid>
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SelectTripCommand}"/>
+                                    <TapGestureRecognizer Command="{Binding SelectExpenseCommand}"/>
                                 </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
