@@ -46,6 +46,24 @@ namespace ExpensesManagment.Web.Controllers
                 .ToListAsync());
         }
 
+        public async Task<IActionResult> MyTrips()
+        {
+            UserEntity user = await _dataContext.Users
+                .Include(t => t.Trips)
+                .ThenInclude(t => t.Expenses)
+                .OrderBy(t => t.UserName)
+                .FirstOrDefaultAsync(t => t.UserName == User.Identity.Name);
+
+            UserTripDetailViewModel model = await _converterHelper.ToUserTripDetailViewModel(user.Id);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
         public async Task<IActionResult> UserTripDetail(string id)
         {
             if (id == null)

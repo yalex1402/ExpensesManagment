@@ -37,6 +37,11 @@
                     {
                         <li><a asp-area="" asp-controller="Trip" asp-action="UserTrip">Trips</a></li>
                     }
+                    else if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Trip" asp-action="MyTrips">My Trips</a></li>
+                    }
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)

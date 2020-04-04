@@ -1,0 +1,120 @@
+﻿@model ExpensesManagment.Web.Models.UserTripDetailViewModel
+
+@{
+    ViewData["Title"] = "User Trip Details";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<br />
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserEmail)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.UserEmail)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.UserPicture))
+            {
+                <img src="@Url.Content(Model.UserPicture)" alt="Image" style="width:150px;height:150px;max-width: 100%; height: auto;" />
+            }
+        </div>
+    </div>
+</div>
+
+<p>
+    <a asp-action="Create" asp-route-id="@Model.UserId" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add New Trip</a>
+</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Trips</h3>
+            </div>
+            <div class="panel panel-body">
+                <table class="table table-hover table-responsive table-striped" id="TripTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                City Visited
+                            </th>
+                            <th>
+                                Start Date
+                            </th>
+                            <th>
+                                End Date
+                            </th>
+                            <th>
+                                # Expenses
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Trips)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CityVisited)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StartDateLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EndDateLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Expenses.Count)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    <a asp-action="TripExpensesDetail" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon-align-justify"></i></a>
+                                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#TripTable').DataTable();
+
+            // Delete item
+            var item_to_delete;
+
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Trip/Delete/' + item_to_delete;
+            });
+        });
+    </script>
+}
