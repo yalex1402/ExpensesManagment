@@ -217,5 +217,18 @@ namespace ExpensesManagment.Web.Helpers
                 ExpenseType = await _expenseHelper.GetExpenseTypeAsync(expenseRequest.ExpenseTypeId)
         };
         }
+
+        public ExpenseResponse ToExpenseResponse (ExpenseEntity expenseEntity)
+        {
+            return new ExpenseResponse
+            {
+                Id = expenseEntity.Id,
+                Details = expenseEntity.Details,
+                Date = expenseEntity.Date,
+                PicturePath = expenseEntity.PicturePath,
+                Value = expenseEntity.Value,
+                Type = ToExpenseTypeResponse(expenseEntity.ExpenseType)
+            };
+        }
     }
 }

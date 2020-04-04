@@ -37,5 +37,16 @@ namespace ExpensesManagment.Web.Helpers
                 .FirstOrDefaultAsync(t => t.Id == id);
             return tripEntity;
         }
+
+        public async Task<ExpenseEntity> GetExpenseAsync(int? id)
+        {
+            ExpenseEntity expenseEntity = await _dataContext.Expenses
+                .Include(e => e.ExpenseType)
+                .Include(e => e.Trip)
+                .Include(e => e.User)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            return expenseEntity;
+        }
     }
 }

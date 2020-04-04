@@ -54,6 +54,44 @@ namespace ExpensesManagment.Common.Services
             }
         }
 
+        public async Task<Response> GetTripAsync(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken)
+        {
+            try
+            {
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.GetAsync(url);
+                string result = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                TripResponse trip = JsonConvert.DeserializeObject<TripResponse>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = trip
+                };
+            }   
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
         public async Task<bool> CheckConnectionAsync(string url)
         {
             if (!CrossConnectivity.Current.IsConnected)
@@ -448,7 +486,43 @@ namespace ExpensesManagment.Common.Services
             }
         }
 
-
+        public async Task<Response> DeleteExpenseAsync(string urlBase, string servicePrefix, string controller, ExpenseRequest expenseRequest, string tokenType, string accessToken)
+        {
+            try
+            {
+                string request = JsonConvert.SerializeObject(expenseRequest);
+                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.DeleteAsync(url);
+                string result = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = "Expense was deleted successfully"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
 
     }
 }

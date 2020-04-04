@@ -99,10 +99,12 @@
                          VerticalOptions="EndAndExpand">
                 <Button Command="{Binding EditExpenseCommand}"
                         IsEnabled="{Binding IsEnabled}"
+                        ImageSource="ic_edit"
                         Text="Edit"/>
                 <Button Command="{Binding DeleteExpenseCommand}"
                         IsEnabled="{Binding IsEnabled}"
                         Text="Delete"
+                        ImageSource="ic_delete_forever"
                         Style="{StaticResource DangerButton}"/>
             </StackLayout>
         </StackLayout>

@@ -22,16 +22,19 @@ namespace ExpensesManagment.Web.Controllers.API
         private readonly IConverterHelper _converterHelper;
         private readonly IUserHelper _userHelper;
         private readonly ITripHelper _tripHelper;
+        private readonly IImageHelper _imageHelper;
 
         public TripController(DataContext dataContext,
             IConverterHelper converterHelper,
             IUserHelper userHelper,
-            ITripHelper tripHelper)
+            ITripHelper tripHelper,
+            IImageHelper imageHelper)
         {
             _dataContext = dataContext;
             _converterHelper = converterHelper;
             _userHelper = userHelper;
             _tripHelper = tripHelper;
+            _imageHelper = imageHelper;
         }
 
         [HttpGet("{id}")]
@@ -175,6 +178,61 @@ namespace ExpensesManagment.Web.Controllers.API
             }
 
             _dataContext.Trips.Remove(tripEntity);
+            await _dataContext.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("ModifyExpense")]
+        public async Task<IActionResult> ModifyExpense([FromBody] ExpenseRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ExpenseEntity expenseEntity = await _tripHelper.GetExpenseAsync(request.Id);
+
+            if (expenseEntity == null)
+            {
+                return BadRequest("Expense doesn't exist");
+            }
+
+            string picturePath = expenseEntity.PicturePath;
+            if (request.PictureArray != null && request.PictureArray.Length > 0)
+            {
+                picturePath = _imageHelper.UploadImage(request.PictureArray, "Expenses");
+            }
+
+            expenseEntity.Details = request.Details;
+            expenseEntity.Date = request.Date;
+            expenseEntity.Value = request.Value;
+            expenseEntity.PicturePath = picturePath;
+
+            _dataContext.Expenses.Update(expenseEntity);
+            await _dataContext.SaveChangesAsync();
+
+            ExpenseEntity expenseUpdated = await _tripHelper.GetExpenseAsync(request.Id);
+            return Ok(_converterHelper.ToExpenseResponse(expenseUpdated));
+        }
+
+        [HttpDelete]
+        [Route("DeleteExpense")]
+        public async Task<IActionResult> DeleteExpense([FromBody]ExpenseRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ExpenseEntity expenseEntity = await _tripHelper.GetExpenseAsync(request.Id);
+
+            if (expenseEntity == null)
+            {
+                return BadRequest("Expense doesn't exist");
+            }
+
+            _dataContext.Expenses.Remove(expenseEntity);
             await _dataContext.SaveChangesAsync();
             return NoContent();
         }

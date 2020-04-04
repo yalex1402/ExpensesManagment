@@ -7,6 +7,8 @@ namespace ExpensesManagment.Common.Services
     {
         Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller);
 
+        Task<Response> GetTripAsync(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken);
+
         Task<bool> CheckConnectionAsync(string url);
 
         Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
@@ -28,6 +30,8 @@ namespace ExpensesManagment.Common.Services
         Task<Response> ChangePasswordAsync(string urlBase, string servicePrefix, string controller, ChangePasswordRequest changePasswordRequest, string tokenType, string accessToken);
 
         Task<Response> DeleteTripAsync(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken);
+
+        Task<Response> DeleteExpenseAsync(string urlBase, string servicePrefix, string controller, ExpenseRequest expenseRequest, string tokenType, string accessToken);
 
     }
 }

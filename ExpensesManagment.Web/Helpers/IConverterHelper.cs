@@ -33,5 +33,7 @@ namespace ExpensesManagment.Web.Helpers
         Task<TripEntity> ToTripEntity(TripRequest tripRequest);
 
         Task<ExpenseEntity> ToExpenseEntity(ExpenseRequest expenseRequest);
+
+        ExpenseResponse ToExpenseResponse(ExpenseEntity expenseEntity);
     }
 }
