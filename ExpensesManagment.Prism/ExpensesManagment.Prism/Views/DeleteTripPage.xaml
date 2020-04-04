@@ -43,6 +43,7 @@
                     <Entry Grid.Column="1"
                 	       Grid.Row="1"
                 	       Placeholder="email"
+                           Keyboard="Email"
                            Text="{Binding Email}"/>
                     
                 </Grid>

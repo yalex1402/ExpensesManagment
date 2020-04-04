@@ -486,12 +486,10 @@ namespace ExpensesManagment.Common.Services
             }
         }
 
-        public async Task<Response> DeleteExpenseAsync(string urlBase, string servicePrefix, string controller, ExpenseRequest expenseRequest, string tokenType, string accessToken)
+        public async Task<Response> DeleteExpenseAsync(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken)
         {
             try
             {
-                string request = JsonConvert.SerializeObject(expenseRequest);
-                StringContent content = new StringContent(request, Encoding.UTF8, "application/json");
                 HttpClient client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase)

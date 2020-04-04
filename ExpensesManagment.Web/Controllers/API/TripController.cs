@@ -217,15 +217,15 @@ namespace ExpensesManagment.Web.Controllers.API
         }
 
         [HttpDelete]
-        [Route("DeleteExpense")]
-        public async Task<IActionResult> DeleteExpense([FromBody]ExpenseRequest request)
+        [Route("DeleteExpense/{id}")]
+        public async Task<IActionResult> DeleteExpense([FromRoute]int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            ExpenseEntity expenseEntity = await _tripHelper.GetExpenseAsync(request.Id);
+            ExpenseEntity expenseEntity = await _tripHelper.GetExpenseAsync(id);
 
             if (expenseEntity == null)
             {

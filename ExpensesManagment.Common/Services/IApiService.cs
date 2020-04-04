@@ -31,7 +31,7 @@ namespace ExpensesManagment.Common.Services
 
         Task<Response> DeleteTripAsync(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken);
 
-        Task<Response> DeleteExpenseAsync(string urlBase, string servicePrefix, string controller, ExpenseRequest expenseRequest, string tokenType, string accessToken);
+        Task<Response> DeleteExpenseAsync(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken);
 
     }
 }
