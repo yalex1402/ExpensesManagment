@@ -2,9 +2,121 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.ExpenseDetailPage"
              Title="{Binding Title}"
              BackgroundColor="{StaticResource ColorBackgroud}">
-  
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Padding="5">
+            <ScrollView>
+                <StackLayout>
+                    <ffimageloading:CachedImage Aspect="AspectFit"
+                                                Source="{Binding Image}" 
+                                                CacheDuration= "50"
+                                                HeightRequest="300"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CropTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="Subtitle"
+                               Text="Type"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                               FontAttributes="Italic"
+                               FontSize="Subtitle"
+                               Text="{Binding Expense.Type.Name}"
+                               VerticalOptions="Center"/>
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="Subtitle"
+                               Text="Details"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               FontAttributes="Italic"
+                               FontSize="Subtitle"
+                               Text="{Binding Expense.Details}"
+                               VerticalOptions="Center"/>
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="Subtitle"
+                               Text="Value"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                               FontAttributes="Italic"
+                               FontSize="Subtitle"
+                               Text="{Binding Expense.Value , StringFormat='{0:#.00}'}"
+                               VerticalOptions="Center"/>
+
+                        <Label Grid.Row="3"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="Subtitle"
+                               Text="Date"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Row="3"
+                               Grid.Column="1"
+                               FontAttributes="Italic"
+                               FontSize="Subtitle"
+                               Text="{Binding Expense.Date, StringFormat='{0:yyyy-MM-dd}'}"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="EndAndExpand">
+                <Button Command="{Binding EditExpenseCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="Edit"/>
+                <Button Command="{Binding DeleteExpenseCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="Delete"
+                        Style="{StaticResource DangerButton}"/>
+            </StackLayout>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
+                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                   AbsoluteLayout.LayoutFlags="All"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
+                	                   HorizontalOptions="Center"
+                	                   TextColor="{StaticResource ColorFontInverse}"
+                	                   IsVisible="{Binding IsRunning}"
+                	                   Title="Loading..."
+                	                   VerticalOptions="Center"
+                	                   ViewBoxWidth="80"
+                	                   ViewBoxHeight="80" />
+    </AbsoluteLayout>
+
 </ContentPage>
