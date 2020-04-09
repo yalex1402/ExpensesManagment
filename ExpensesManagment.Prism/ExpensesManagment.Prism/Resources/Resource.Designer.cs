@@ -70,6 +70,24 @@ namespace ExpensesManagment.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a new expense.
+        /// </summary>
+        internal static string AddExpense {
+            get {
+                return ResourceManager.GetString("AddExpense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new trip.
+        /// </summary>
+        internal static string AddTrip {
+            get {
+                return ResourceManager.GetString("AddTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
@@ -79,11 +97,47 @@ namespace ExpensesManagment.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        internal static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this expense.
+        /// </summary>
+        internal static string DeleteExpense {
+            get {
+                return ResourceManager.GetString("DeleteExpense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this trip.
+        /// </summary>
+        internal static string DeleteTrip {
+            get {
+                return ResourceManager.GetString("DeleteTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date selected is invalid.
+        /// </summary>
+        internal static string ErrorDate {
+            get {
+                return ResourceManager.GetString("ErrorDate", resourceCulture);
             }
         }
         
@@ -106,6 +160,24 @@ namespace ExpensesManagment.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must select an expense type.
+        /// </summary>
+        internal static string ErrorExpenseType {
+            get {
+                return ResourceManager.GetString("ErrorExpenseType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email or Password are incorrect.
+        /// </summary>
+        internal static string ErrorLogin {
+            get {
+                return ResourceManager.GetString("ErrorLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password is incorrect.
         /// </summary>
         internal static string ErrorPassword {
@@ -124,6 +196,15 @@ namespace ExpensesManagment.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password have to have minimun 6 characters.
+        /// </summary>
+        internal static string ErrorPassword3 {
+            get {
+                return ResourceManager.GetString("ErrorPassword3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must select a role.
         /// </summary>
         internal static string ErrorRole {
@@ -133,11 +214,38 @@ namespace ExpensesManagment.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expense value is incorrect.
+        /// </summary>
+        internal static string ErrorValue {
+            get {
+                return ResourceManager.GetString("ErrorValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expense was deleted successfully.
+        /// </summary>
+        internal static string ExpenseDeleted {
+            get {
+                return ResourceManager.GetString("ExpenseDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expenses.
         /// </summary>
         internal static string Expenses {
             get {
                 return ResourceManager.GetString("Expenses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expense was updated successfully.
+        /// </summary>
+        internal static string ExpenseUpdated {
+            get {
+                return ResourceManager.GetString("ExpenseUpdated", resourceCulture);
             }
         }
         
@@ -169,11 +277,56 @@ namespace ExpensesManagment.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        internal static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modify Expense.
+        /// </summary>
+        internal static string ModifyExpense {
+            get {
+                return ResourceManager.GetString("ModifyExpense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modify Trip.
+        /// </summary>
+        internal static string ModifyTrip {
+            get {
+                return ResourceManager.GetString("ModifyTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modify User.
         /// </summary>
         internal static string ModifyUser {
             get {
                 return ResourceManager.GetString("ModifyUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Trips.
+        /// </summary>
+        internal static string MyTrips {
+            get {
+                return ResourceManager.GetString("MyTrips", resourceCulture);
             }
         }
         
@@ -214,11 +367,29 @@ namespace ExpensesManagment.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trip was deleted successfully.
+        /// </summary>
+        internal static string TripDeleted {
+            get {
+                return ResourceManager.GetString("TripDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trips.
         /// </summary>
         internal static string Trips {
             get {
                 return ResourceManager.GetString("Trips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trip was updated successfully.
+        /// </summary>
+        internal static string TripUpdated {
+            get {
+                return ResourceManager.GetString("TripUpdated", resourceCulture);
             }
         }
         

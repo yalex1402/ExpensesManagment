@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -27,7 +28,7 @@ namespace ExpensesManagment.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             IsEnabled = true;
-            Title = "Change Password";
+            Title = Languages.ChangePassword;
         }
 
         public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePasswordAsync));
@@ -68,7 +69,7 @@ namespace ExpensesManagment.Prism.ViewModels
                 Email = user.Email,
                 NewPassword = NewPassword,
                 OldPassword = CurrentPassword,
-                CultureInfo = "es"
+                CultureInfo = Languages.Culture
             };
 
             string url = App.Current.Resources["UrlAPI"].ToString();
@@ -79,11 +80,11 @@ namespace ExpensesManagment.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert("Ok", response.Message, "Accept");
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
 
         }
@@ -92,25 +93,25 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(CurrentPassword))
             {
-                await App.Current.MainPage.DisplayAlert("Error","You must write your current password","Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error,Languages.ErrorEmptyField,Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(NewPassword) || NewPassword?.Length < 6)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a new password and it has to minimum 6 characters", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorPassword3, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(PasswordConfirm))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a new password", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (NewPassword != PasswordConfirm)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Passwords aren't the same", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorPassword2, Languages.Accept);
                 return false;
             }
 

@@ -174,4 +174,61 @@
   <data name="UserUpdated" xml:space="preserve">
     <value>Pagine aggiornate con successo.</value>
   </data>
+  <data name="ModifyTrip" xml:space="preserve">
+    <value>Modifica viaggio</value>
+  </data>
+  <data name="ModifyExpense" xml:space="preserve">
+    <value>Modifica spese</value>
+  </data>
+  <data name="TripUpdated" xml:space="preserve">
+    <value>Il viaggio è stato aggiornato con successo</value>
+  </data>
+  <data name="ExpenseUpdated" xml:space="preserve">
+    <value>Le spese sono state aggiornate con successo!</value>
+  </data>
+  <data name="ErrorDate" xml:space="preserve">
+    <value>La data selezionata non è valida.</value>
+  </data>
+  <data name="ErrorValue" xml:space="preserve">
+    <value>Il valore delle spese non è corretto!</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Accesso</value>
+  </data>
+  <data name="ErrorLogin" xml:space="preserve">
+    <value>E-mail o password errati</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Disconnetti</value>
+  </data>
+  <data name="MyTrips" xml:space="preserve">
+    <value>I miei viaggi</value>
+  </data>
+  <data name="DeleteTrip" xml:space="preserve">
+    <value>Elimina questo viaggio</value>
+  </data>
+  <data name="DeleteExpense" xml:space="preserve">
+    <value>Elimina questa spesa</value>
+  </data>
+  <data name="AddTrip" xml:space="preserve">
+    <value>Aggiungi un nuovo viaggio</value>
+  </data>
+  <data name="AddExpense" xml:space="preserve">
+    <value>Aggiungi una nuova spesa!</value>
+  </data>
+  <data name="TripDeleted" xml:space="preserve">
+    <value>Il viaggio è stato cancellato con successo!</value>
+  </data>
+  <data name="ExpenseDeleted" xml:space="preserve">
+    <value>Le spese sono state eliminate con successo!</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambia password</value>
+  </data>
+  <data name="ErrorPassword3" xml:space="preserve">
+    <value>La password deve contenere almeno 6 caratteri!</value>
+  </data>
+  <data name="ErrorExpenseType" xml:space="preserve">
+    <value>Devi selezionare un tipo di spesa!</value>
+  </data>
 </root>

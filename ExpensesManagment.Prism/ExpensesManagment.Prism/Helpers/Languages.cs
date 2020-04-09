@@ -57,5 +57,42 @@ namespace ExpensesManagment.Prism.Helpers
 
         public static string UserUpdated => Resource.UserUpdated;
 
+        public static string ModifyTrip => Resource.ModifyTrip;
+
+        public static string TripUpdated => Resource.TripUpdated;
+
+        public static string ModifyExpense => Resource.ModifyExpense;
+
+        public static string ExpenseUpdated => Resource.ExpenseUpdated;
+
+        public static string ErrorDate => Resource.ErrorDate;
+
+        public static string ErrorValue => Resource.ErrorValue;
+
+        public static string Login => Resource.Login;
+
+        public static string Logout => Resource.Logout;
+
+        public static string ErrorLogin => Resource.ErrorLogin;
+
+        public static string MyTrips => Resource.MyTrips;
+
+        public static string DeleteTrip => Resource.DeleteTrip;
+
+        public static string DeleteExpense => Resource.DeleteExpense;
+
+        public static string AddTrip => Resource.AddTrip;
+
+        public static string AddExpense => Resource.AddExpense;
+
+        public static string TripDeleted => Resource.TripDeleted;
+
+        public static string ExpenseDeleted => Resource.ExpenseDeleted;
+
+        public static string ChangePassword => Resource.ChangePassword;
+
+        public static string ErrorPassword3 => Resource.ErrorPassword3;
+
+        public static string ErrorExpenseType => Resource.ErrorExpenseType;
     }
 }

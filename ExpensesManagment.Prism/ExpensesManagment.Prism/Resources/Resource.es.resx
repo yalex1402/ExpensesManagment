@@ -174,4 +174,61 @@
   <data name="UserUpdated" xml:space="preserve">
     <value>Usuario actualizado con éxito</value>
   </data>
+  <data name="ModifyTrip" xml:space="preserve">
+    <value>Modificar Viaje</value>
+  </data>
+  <data name="ModifyExpense" xml:space="preserve">
+    <value>Modificar Gasto</value>
+  </data>
+  <data name="TripUpdated" xml:space="preserve">
+    <value>El viaje fue actualizado exitosamente</value>
+  </data>
+  <data name="ExpenseUpdated" xml:space="preserve">
+    <value>El gasto se actualizó con éxito</value>
+  </data>
+  <data name="ErrorDate" xml:space="preserve">
+    <value>La fecha seleccionada no es válida</value>
+  </data>
+  <data name="ErrorValue" xml:space="preserve">
+    <value>El valor del gasto es incorrecto</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Inicio de sesión</value>
+  </data>
+  <data name="ErrorLogin" xml:space="preserve">
+    <value>Email o contraseña incorrectos</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="MyTrips" xml:space="preserve">
+    <value>Mis Viajes</value>
+  </data>
+  <data name="DeleteTrip" xml:space="preserve">
+    <value>Borrar este viaje</value>
+  </data>
+  <data name="DeleteExpense" xml:space="preserve">
+    <value>Eliminar este gasto</value>
+  </data>
+  <data name="AddTrip" xml:space="preserve">
+    <value>Añadir un nuevo viaje</value>
+  </data>
+  <data name="AddExpense" xml:space="preserve">
+    <value>Añadir un nuevo gasto</value>
+  </data>
+  <data name="TripDeleted" xml:space="preserve">
+    <value>El viaje fue eliminado con éxito</value>
+  </data>
+  <data name="ExpenseDeleted" xml:space="preserve">
+    <value>El gasto se eliminó con éxito</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="ErrorPassword3" xml:space="preserve">
+    <value>La contraseña debe tener un mínimo de 6 caracteres</value>
+  </data>
+  <data name="ErrorExpenseType" xml:space="preserve">
+    <value>Debe seleccionar un tipo de gasto</value>
+  </data>
 </root>

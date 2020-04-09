@@ -174,4 +174,61 @@
   <data name="UserUpdated" xml:space="preserve">
     <value>User was updated successfully</value>
   </data>
+  <data name="ModifyTrip" xml:space="preserve">
+    <value>Modify Trip</value>
+  </data>
+  <data name="ModifyExpense" xml:space="preserve">
+    <value>Modify Expense</value>
+  </data>
+  <data name="TripUpdated" xml:space="preserve">
+    <value>Trip was updated successfully</value>
+  </data>
+  <data name="ExpenseUpdated" xml:space="preserve">
+    <value>Expense was updated successfully</value>
+  </data>
+  <data name="ErrorDate" xml:space="preserve">
+    <value>Date selected is invalid</value>
+  </data>
+  <data name="ErrorValue" xml:space="preserve">
+    <value>Expense value is incorrect</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="ErrorLogin" xml:space="preserve">
+    <value>Email or Password are incorrect</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="MyTrips" xml:space="preserve">
+    <value>My Trips</value>
+  </data>
+  <data name="DeleteTrip" xml:space="preserve">
+    <value>Delete this trip</value>
+  </data>
+  <data name="DeleteExpense" xml:space="preserve">
+    <value>Delete this expense</value>
+  </data>
+  <data name="AddTrip" xml:space="preserve">
+    <value>Add a new trip</value>
+  </data>
+  <data name="AddExpense" xml:space="preserve">
+    <value>Add a new expense</value>
+  </data>
+  <data name="TripDeleted" xml:space="preserve">
+    <value>Trip was deleted successfully</value>
+  </data>
+  <data name="ExpenseDeleted" xml:space="preserve">
+    <value>Expense was deleted successfully</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="ErrorPassword3" xml:space="preserve">
+    <value>Password have to have minimun 6 characters</value>
+  </data>
+  <data name="ErrorExpenseType" xml:space="preserve">
+    <value>You must select an expense type</value>
+  </data>
 </root>

@@ -42,7 +42,7 @@ namespace ExpensesManagment.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             _filesHelper = filesHelper;
-            Title = "Add new expense";
+            Title = Languages.AddExpense;
             Image = App.Current.Resources["UrlNoImage"].ToString();
             IsRunning = false;
             IsEnabled = true;
@@ -114,7 +114,7 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
             
@@ -161,13 +161,13 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Expense.Value.ToString()) || Expense.Value <= 0)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Value is incorrect", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorValue, Languages.Accept);
                 return false;
             }
 
             if (ExpenseType == null)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must select an expense type", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorExpenseType, Languages.Accept);
                 return false;
             }
 
@@ -179,19 +179,19 @@ namespace ExpensesManagment.Prism.ViewModels
             await CrossMedia.Current.Initialize();
 
             string source = await Application.Current.MainPage.DisplayActionSheet(
-                "Picture Source",
-                "Cancel",
+                Languages.PictureSource,
+                Languages.Cancel,
                 null,
-                "From Gallery",
-                "From Camera");
+                Languages.FromGallery,
+                Languages.FromCamera);
 
-            if (source == "Cancel")
+            if (source == Languages.Cancel)
             {
                 _file = null;
                 return;
             }
 
-            if (source == "From Camera")
+            if (source == Languages.FromCamera)
             {
                 _file = await CrossMedia.Current.TakePhotoAsync(
                     new StoreCameraMediaOptions

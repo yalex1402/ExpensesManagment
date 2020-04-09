@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using ExpensesManagment.Prism.Views;
 using Newtonsoft.Json;
 using Plugin.Media;
@@ -36,7 +37,7 @@ namespace ExpensesManagment.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             _filesHelper = filesHelper;
-            Title = "Modify Expense";
+            Title = Languages.ModifyExpense;
             _user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
             _trip = JsonConvert.DeserializeObject<TripResponse>(Settings.TripSelected);
             IsEnabled = true;
@@ -89,7 +90,7 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
 
@@ -119,7 +120,7 @@ namespace ExpensesManagment.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
@@ -136,7 +137,7 @@ namespace ExpensesManagment.Prism.ViewModels
             Response response3 = await _apiService.GetTripAsync(url, "/api", $"/Trip/{_trip.Id}", "bearer", token.Token);
             TripResponse trip = (TripResponse)response3.Result;
             Settings.TripSelected = JsonConvert.SerializeObject(trip);
-            await App.Current.MainPage.DisplayAlert("Ok", "Expense was updated successfully", "Accept");
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.ExpenseUpdated, Languages.Accept);
             await _navigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage");
         }
 
@@ -144,7 +145,7 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Expense.Value.ToString()) || Expense.Value <= 0)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Value is incorrect", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorValue, Languages.Accept);
                 return false;
             }
 

@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using ExpensesManagment.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
@@ -29,7 +30,7 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Login";
+            Title = Languages.Login;
             IsEnabled = true;
         }
 
@@ -69,19 +70,13 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Email))
             {
-                await App.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Email couldn't be empty",
-                    "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error,Languages.ErrorEmptyField,Languages.Accept);
                 return;
             }
 
             if (string.IsNullOrEmpty(Password))
             {
-                await App.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "Password couldn't be empty",
-                    "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return;
             }
             IsRunning = true;
@@ -93,7 +88,7 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
 
@@ -109,7 +104,7 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "Email or password are incorrect", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorLogin, Languages.Accept);
                 Password = string.Empty;
                 return;
             }
@@ -117,7 +112,7 @@ namespace ExpensesManagment.Prism.ViewModels
             TokenResponse token = (TokenResponse)response.Result;
             EmailRequest emailRequest = new EmailRequest
             {
-                CultureInfo = "es",
+                CultureInfo = Languages.Culture,
                 Email = Email
             };
 

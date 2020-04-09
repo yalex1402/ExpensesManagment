@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -28,7 +29,7 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Delete Trip";
+            Title = Languages.DeleteTrip;
             _trip = JsonConvert.DeserializeObject<TripResponse>(Settings.TripSelected);
             _user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
             _isRunning = false;
@@ -81,7 +82,7 @@ namespace ExpensesManagment.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
@@ -97,7 +98,7 @@ namespace ExpensesManagment.Prism.ViewModels
 
             Settings.Trips = JsonConvert.SerializeObject(trips);
             Settings.TripSelected = null;
-            await App.Current.MainPage.DisplayAlert("Ok", "Trip was deleted successfully", "Accept");
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.TripDeleted, Languages.Accept);
             await _navigationService.NavigateAsync("/ExpensesMasterDetailPage/NavigationPage/TripsPage");
         }
 
@@ -105,13 +106,13 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Email))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a email", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (Email != _user.Email)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Email doesn't exist", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmail, Languages.Accept);
                 return false;
             }
 

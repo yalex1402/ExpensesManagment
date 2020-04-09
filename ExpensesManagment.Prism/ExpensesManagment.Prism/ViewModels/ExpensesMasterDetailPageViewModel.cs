@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using ExpensesManagment.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
@@ -56,7 +57,7 @@ namespace ExpensesManagment.Prism.ViewModels
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
             EmailRequest emailRequest = new EmailRequest
             {
-                CultureInfo = "es",
+                CultureInfo = Languages.Culture,
                 Email = user.Email
             };
 
@@ -83,19 +84,19 @@ namespace ExpensesManagment.Prism.ViewModels
                 {
                     Icon = "ic_local_airport",
                     PageName = "TripsPage",
-                    Title = "My trips"
+                    Title = Languages.MyTrips
                 },
                 new Menu
                 {
                     Icon = "ic_account_circle",
                     PageName = "ModifyUserPage",
-                    Title = "Modify User"
+                    Title = Languages.ModifyUser
                 },
                 new Menu
                 {
                     Icon = "ic_exit_to_app",
                     PageName = "LoginPage",
-                    Title = Settings.IsLogin? "Logout" : "Login"
+                    Title = Settings.IsLogin? Languages.Logout : Languages.Login
                 }
             };
 

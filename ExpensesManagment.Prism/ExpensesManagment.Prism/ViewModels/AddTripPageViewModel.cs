@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -26,7 +27,7 @@ namespace ExpensesManagment.Prism.ViewModels
             IApiService apiService,
             IRegexHelper regexHelper) : base(navigationService)
         {
-            Title = "Add a new trip";
+            Title = Languages.AddTrip;
             _navigationService = navigationService;
             _apiService = apiService;
             _regexHelper = regexHelper;
@@ -75,7 +76,7 @@ namespace ExpensesManagment.Prism.ViewModels
             if (!connection)
             {
                 IsRunning = false;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the Internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
 
@@ -93,19 +94,19 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Trip.CityVisited))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a city name","Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField,Languages.Accept);
                 return false;
             }
 
             if (!_regexHelper.IsValidDate(Trip.StartDate.ToString()))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a date in the format yyyy-mm-dd", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorDate, Languages.Accept);
                 return false;
             }
 
             if (!_regexHelper.IsValidDate(Trip.EndDate.ToString()))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a date in the format yyyy-mm-dd", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorDate, Languages.Accept);
                 return false;
             }
             return true;
