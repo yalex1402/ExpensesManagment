@@ -40,7 +40,7 @@ namespace ExpensesManagment.Prism.ViewModels
             _regexHelper = regexHelper;
             _apiService = apiService;
             _filesHelper = filesHelper;
-            Title = "Register";
+            Title = Languages.Register;
             Image = App.Current.Resources["UrlNoImage"].ToString();
             IsEnabled = true;
             User = new UserRequest();
@@ -102,7 +102,7 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
             byte[] imageArray = null;
@@ -112,18 +112,18 @@ namespace ExpensesManagment.Prism.ViewModels
             }
             User.PictureArray = imageArray;
             User.UserTypeId = Role.Id;
-            User.CultureInfo = "es";
+            User.CultureInfo = Languages.Culture;
             Response response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
             IsRunning = false;
             IsEnabled = true;
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert("Ok", response.Message, "Accept");
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
 
         }
@@ -132,55 +132,55 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(User.Document))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a document", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(User.FirstName))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write your first name", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(User.LastName))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write your last name", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(User.Email) || !_regexHelper.IsValidEmail(User.Email))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "The email is incorrect", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmail, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(User.Phone))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a phone number", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (Role == null)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must select a role", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorRole, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(User.Password) || User.Password?.Length < 6)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Password incorrect", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorPassword, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(User.PasswordConfirm))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write the password confirmation", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (User.Password != User.PasswordConfirm)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Passwords aren't the same", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorPassword2, Languages.Accept);
                 return false;
             }
 
@@ -192,19 +192,19 @@ namespace ExpensesManagment.Prism.ViewModels
             await CrossMedia.Current.Initialize();
 
             string source = await Application.Current.MainPage.DisplayActionSheet(
-                "Picture Source",
-                "Cancel",
+                Languages.PictureSource,
+                Languages.Cancel,
                 null,
-                "From Gallery",
-                "From Camera");
+                Languages.FromGallery,
+                Languages.FromCamera);
 
-            if (source == "Cancel")
+            if (source == Languages.Cancel)
             {
                 _file = null;
                 return;
             }
 
-            if (source == "From Camera")
+            if (source == Languages.FromCamera)
             {
                 _file = await CrossMedia.Current.TakePhotoAsync(
                     new StoreCameraMediaOptions

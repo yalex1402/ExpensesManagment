@@ -77,6 +77,7 @@
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\Localize.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +105,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ExpensesManagment.Common\ExpensesManagment.Common.csproj">
+      <Project>{60F74DB3-2B1F-4F69-9513-C4238B878E6C}</Project>
+      <Name>ExpensesManagment.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExpensesManagment.Prism\ExpensesManagment.Prism.csproj">
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>ExpensesManagment.Prism</Name>
@@ -166,5 +171,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_add_shopping_cart.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

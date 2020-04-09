@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using Prism.Commands;
 using Prism.Navigation;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace ExpensesManagment.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             _regexHelper = regexHelper;
-            Title = "Recover Password";
+            Title = Languages.RecoverPassword;
             IsEnabled = true;
         }
 
@@ -62,7 +63,7 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 IsRunning = false;
                 IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
 
@@ -79,11 +80,11 @@ namespace ExpensesManagment.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Accept", response.Message, "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert("Ok", response.Message, "Accept");
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
         }
 
@@ -91,7 +92,7 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Email) || !_regexHelper.IsValidEmail(Email))
             {
-                await App.Current.MainPage.DisplayAlert("Accept", "Email is incorrect", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmail, Languages.Accept);
                 return false;
             }
 

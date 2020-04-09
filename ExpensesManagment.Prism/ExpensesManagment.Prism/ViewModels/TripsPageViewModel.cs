@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using ExpensesManagment.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
@@ -25,7 +26,7 @@ namespace ExpensesManagment.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Trips";
+            Title = Languages.Trips;
             _isRunning = false;
             LoadMyTrips();
         }
@@ -57,7 +58,7 @@ namespace ExpensesManagment.Prism.ViewModels
             if (!connection)
             {
                 IsRunning = false;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.InternetConnection, Languages.Accept);
                 return;
             }
 

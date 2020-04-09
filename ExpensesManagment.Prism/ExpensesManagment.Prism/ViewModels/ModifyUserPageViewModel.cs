@@ -2,6 +2,7 @@
 using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using ExpensesManagment.Prism.Views;
 using Newtonsoft.Json;
 using Plugin.Media;
@@ -39,7 +40,7 @@ namespace ExpensesManagment.Prism.ViewModels
             _navigationService = navigationService;
             _filesHelper = filesHelper;
             _apiService = apiService;
-            Title = "Modify User";
+            Title = Languages.ModifyUser;
             IsEnabled = true;
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
             Image = User.PictureFullPath;
@@ -101,7 +102,7 @@ namespace ExpensesManagment.Prism.ViewModels
                 Phone = User.PhoneNumber,
                 PictureArray = imageArray,
                 UserTypeId = User.UserType == UserType.Employee ? 1 : 2,
-                CultureInfo = "es"
+                CultureInfo = Languages.Culture
             };
 
             var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
@@ -114,41 +115,38 @@ namespace ExpensesManagment.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert(
-                    "Error",
-                    response.Message,
-                    "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error,response.Message,Languages.Accept);
                 return;
             }
 
             Settings.User = JsonConvert.SerializeObject(User);
             ExpensesMasterDetailPageViewModel.GetInstance().ReloadUser();
-            await App.Current.MainPage.DisplayAlert("Ok", "User updated successfully", "Accept");
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.UserUpdated, Languages.Accept);
         }
 
         private async Task<bool> ValidateDataAsync()
         {
             if (string.IsNullOrEmpty(User.Document))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a document", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(User.FirstName))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write your first name", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(User.LastName))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write your last name", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(User.PhoneNumber))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must write a phone number", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorEmptyField, Languages.Accept);
                 return false;
             }
 
@@ -160,19 +158,19 @@ namespace ExpensesManagment.Prism.ViewModels
             await CrossMedia.Current.Initialize();
 
             string source = await Application.Current.MainPage.DisplayActionSheet(
-                "Source",
-                "Cancel",
+                Languages.PictureSource,
+                Languages.Cancel,
                 null,
-                "From Gallery",
-                "From Camera");
+                Languages.FromGallery,
+                Languages.FromCamera);
 
-            if (source == "Cancel")
+            if (source == Languages.Cancel)
             {
                 _file = null;
                 return;
             }
 
-            if (source == "From Camera")
+            if (source == Languages.FromCamera)
             {
                 _file = await CrossMedia.Current.TakePhotoAsync(
                     new StoreCameraMediaOptions
