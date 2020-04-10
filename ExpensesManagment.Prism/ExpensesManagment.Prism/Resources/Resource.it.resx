@@ -127,7 +127,7 @@
     <value>Accetta</value>
   </data>
   <data name="InternetConnection" xml:space="preserve">
-    <value>Controlla la connessione Internet.</value>
+    <value>Controlla la connessione Internet</value>
   </data>
   <data name="Expenses" xml:space="preserve">
     <value>Spese</value>
@@ -145,16 +145,16 @@
     <value>Registra</value>
   </data>
   <data name="ErrorEmptyField" xml:space="preserve">
-    <value>Il campo non può essere vuoto!</value>
+    <value>Il campo non può essere vuoto</value>
   </data>
   <data name="ErrorRole" xml:space="preserve">
-    <value>È necessario selezionare un ruolo.</value>
+    <value>È necessario selezionare un ruolo</value>
   </data>
   <data name="ErrorPassword" xml:space="preserve">
-    <value>La password non è corretta.</value>
+    <value>La password non è corretta</value>
   </data>
   <data name="ErrorPassword2" xml:space="preserve">
-    <value>Le password non sono le stesse!</value>
+    <value>Le password non sono le stesse</value>
   </data>
   <data name="PictureSource" xml:space="preserve">
     <value>Origine dell'immagine</value>
@@ -172,7 +172,7 @@
     <value>Modifica utente</value>
   </data>
   <data name="UserUpdated" xml:space="preserve">
-    <value>Pagine aggiornate con successo.</value>
+    <value>Pagine aggiornate con successo</value>
   </data>
   <data name="ModifyTrip" xml:space="preserve">
     <value>Modifica viaggio</value>
@@ -184,13 +184,13 @@
     <value>Il viaggio è stato aggiornato con successo</value>
   </data>
   <data name="ExpenseUpdated" xml:space="preserve">
-    <value>Le spese sono state aggiornate con successo!</value>
+    <value>Le spese sono state aggiornate con successo</value>
   </data>
   <data name="ErrorDate" xml:space="preserve">
-    <value>La data selezionata non è valida.</value>
+    <value>La data selezionata non è valida</value>
   </data>
   <data name="ErrorValue" xml:space="preserve">
-    <value>Il valore delle spese non è corretto!</value>
+    <value>Il valore delle spese non è corretto</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Accesso</value>
@@ -214,21 +214,123 @@
     <value>Aggiungi un nuovo viaggio</value>
   </data>
   <data name="AddExpense" xml:space="preserve">
-    <value>Aggiungi una nuova spesa!</value>
+    <value>Aggiungi una nuova spesa</value>
   </data>
   <data name="TripDeleted" xml:space="preserve">
-    <value>Il viaggio è stato cancellato con successo!</value>
+    <value>Il viaggio è stato cancellato con successo</value>
   </data>
   <data name="ExpenseDeleted" xml:space="preserve">
-    <value>Le spese sono state eliminate con successo!</value>
+    <value>Le spese sono state eliminate con successo</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Cambia password</value>
   </data>
   <data name="ErrorPassword3" xml:space="preserve">
-    <value>La password deve contenere almeno 6 caratteri!</value>
+    <value>La password deve contenere almeno 6 caratteri</value>
   </data>
   <data name="ErrorExpenseType" xml:space="preserve">
-    <value>Devi selezionare un tipo di spesa!</value>
+    <value>Devi selezionare un tipo di spesa</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Caricamento in corso...</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Posta elettronica</value>
+  </data>
+  <data name="EmailPlaceHolder" xml:space="preserve">
+    <value>Scrivi la tua email</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordPlaceHolder" xml:space="preserve">
+    <value>Scrivi la tua password</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Password dimenticata?</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Data di inizio</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Data di fine</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Documento</value>
+  </data>
+  <data name="DocumentPlaceHolder" xml:space="preserve">
+    <value>Scrivi il tuo numero di documento</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="FirstNamePlaceHolder" xml:space="preserve">
+    <value>Scrivi il tuo nome</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Cognome</value>
+  </data>
+  <data name="LastNamePlaceHolder" xml:space="preserve">
+    <value>Scrivi il tuo cognome</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Numero di telefono</value>
+  </data>
+  <data name="PhonePlaceHolder" xml:space="preserve">
+    <value>Il tuo numero di telefono</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Conferma password</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Registrazione come</value>
+  </data>
+  <data name="RolePlaceHolder" xml:space="preserve">
+    <value>Selezionare un ruolo</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Salva</value>
+  </data>
+  <data name="CityVisited" xml:space="preserve">
+    <value>Città Visitato</value>
+  </data>
+  <data name="CityVisitedPlaceHolder" xml:space="preserve">
+    <value>Città che hai visitato</value>
+  </data>
+  <data name="ExpenseType" xml:space="preserve">
+    <value>Tipo di spesa</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Dettagli della spesa</value>
+  </data>
+  <data name="DetailsPlaceHolder" xml:space="preserve">
+    <value>Sulla mia spesa</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Valore</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Modifica</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Elimina</value>
+  </data>
+  <data name="DeleteTripMessage" xml:space="preserve">
+    <value>Vuoi eliminare questo orario</value>
+  </data>
+  <data name="EmailConfirm" xml:space="preserve">
+    <value>Scrivi la tua email per confermare</value>
+  </data>
+  <data name="DeleteExpenseMessage" xml:space="preserve">
+    <value>Vuoi cancellare questa spesa</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Password corrente</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nuova password</value>
   </data>
 </root>

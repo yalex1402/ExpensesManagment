@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:i18n ="clr-namespace:ExpensesManagment.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.TripsPage"
              Title="{Binding Title}"
@@ -75,7 +76,7 @@
                 	                    HorizontalOptions="Center"
                 	                    TextColor="{StaticResource ColorFontInverse}"
                 	                    IsVisible="{Binding IsRunning}"
-                	                    Title="Loading..."
+                	                    Title="{i18n:Translate Loading}"
                 	                    VerticalOptions="Center"
                 	                    ViewBoxWidth="80"
                 	                    ViewBoxHeight="80" />

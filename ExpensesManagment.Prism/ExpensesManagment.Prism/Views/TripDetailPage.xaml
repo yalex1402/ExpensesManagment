@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:i18n ="clr-namespace:ExpensesManagment.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.TripDetailPage"
              Title="{Binding Title}"
@@ -34,7 +35,7 @@
                         <Label FontAttributes="Bold"
                        FontSize="Subtitle"
                        TextColor="{StaticResource ColorFontInverse}"
-                       Text="Start Date:"/>
+                       Text="{i18n:Translate StartDate}"/>
 
                         <Label FontAttributes="Bold"
                        FontSize="Subtitle"
@@ -54,7 +55,7 @@
                         <Label FontAttributes="Bold"
                        FontSize="Subtitle"
                        TextColor="{StaticResource ColorFontInverse}"
-                       Text="End Date:"/>
+                       Text="{i18n:Translate EndDate}"/>
 
                         <Label FontAttributes="Bold"
                        FontSize="Subtitle"
@@ -129,7 +130,7 @@
                 	                HorizontalOptions="Center"
                 	                TextColor="{StaticResource ColorFontInverse}"
                 	                IsVisible="{Binding IsRunning}"
-                	                Title="Loading..."
+                	                Title="{i18n:Translate Loading}"
                 	                VerticalOptions="Center"
                 	                ViewBoxWidth="50"
                 	                ViewBoxHeight="50" />

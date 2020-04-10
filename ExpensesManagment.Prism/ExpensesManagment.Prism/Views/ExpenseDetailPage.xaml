@@ -5,6 +5,7 @@
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:i18n="clr-namespace:ExpensesManagment.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.ExpenseDetailPage"
              Title="{Binding Title}"
@@ -45,7 +46,7 @@
                                Grid.Column="0"
                                FontAttributes="Bold"
                                FontSize="Subtitle"
-                               Text="Type"
+                               Text="{i18n:Translate ExpenseType}"
                                VerticalOptions="Center"/>
                         <Label Grid.Row="0"
                                Grid.Column="1"
@@ -58,7 +59,7 @@
                                Grid.Column="0"
                                FontAttributes="Bold"
                                FontSize="Subtitle"
-                               Text="Details"
+                               Text="{i18n:Translate Details}"
                                VerticalOptions="Center"/>
                         <Label Grid.Row="1"
                                Grid.Column="1"
@@ -71,7 +72,7 @@
                                Grid.Column="0"
                                FontAttributes="Bold"
                                FontSize="Subtitle"
-                               Text="Value"
+                               Text="{i18n:Translate Value}"
                                VerticalOptions="Center"/>
                         <Label Grid.Row="2"
                                Grid.Column="1"
@@ -84,7 +85,7 @@
                                Grid.Column="0"
                                FontAttributes="Bold"
                                FontSize="Subtitle"
-                               Text="Date"
+                               Text="{i18n:Translate Date}"
                                VerticalOptions="Center"/>
                         <Label Grid.Row="3"
                                Grid.Column="1"
@@ -100,10 +101,10 @@
                 <Button Command="{Binding EditExpenseCommand}"
                         IsEnabled="{Binding IsEnabled}"
                         ImageSource="ic_edit"
-                        Text="Edit"/>
+                        Text="{i18n:Translate Edit}"/>
                 <Button Command="{Binding DeleteExpenseCommand}"
                         IsEnabled="{Binding IsEnabled}"
-                        Text="Delete"
+                        Text="{i18n:Translate Delete}"
                         ImageSource="ic_delete_forever"
                         Style="{StaticResource DangerButton}"/>
             </StackLayout>
@@ -115,7 +116,7 @@
                 	                   HorizontalOptions="Center"
                 	                   TextColor="{StaticResource ColorFontInverse}"
                 	                   IsVisible="{Binding IsRunning}"
-                	                   Title="Loading..."
+                	                   Title="{i18n:Translate Loading}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"
                 	                   ViewBoxHeight="80" />

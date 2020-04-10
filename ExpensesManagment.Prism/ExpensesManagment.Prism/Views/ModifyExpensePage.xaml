@@ -5,6 +5,7 @@
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:i18n="clr-namespace:ExpensesManagment.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.ModifyExpensePage"
              Title="{Binding Title}"
@@ -46,7 +47,7 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Text="Type"
+                               Text="{i18n:Translate ExpenseType}"
                                VerticalOptions="Center"/>
                         <Label Grid.Row="0"
                                Grid.Column="1"
@@ -55,16 +56,16 @@
 
                         <Label Grid.Row="1"
                                Grid.Column="0"
-                               Text="Description"
+                               Text="{i18n:Translate Details}"
                                VerticalOptions="Center"/>
                         <Entry Grid.Row="1"
                                Grid.Column="1"
-                               Placeholder="A little description"
+                               Placeholder="{i18n:Translate DetailsPlaceHolder}"
                                Text="{Binding Expense.Details}"/>
 
                         <Label Grid.Row="2"
                                Grid.Column="0"
-                               Text="Value ($)"
+                               Text="{i18n:Translate Value}"
                                VerticalOptions="Center"/>
                         <Entry Grid.Row="2"
                                Grid.Column="1"
@@ -74,7 +75,7 @@
 
                         <Label Grid.Row="3"
                                Grid.Column="0"
-                               Text="Date"
+                               Text="{i18n:Translate Date}"
                                VerticalOptions="Center"/>
                         <DatePicker Grid.Row="3"
                                Grid.Column="1"
@@ -88,7 +89,7 @@
                          VerticalOptions="EndAndExpand">
                 <Button Command="{Binding SaveCommand}"
                         IsEnabled="{Binding IsEnabled}"
-                        Text="Save"/>
+                        Text="{i18n:Translate Save}"/>
             </StackLayout>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
@@ -98,7 +99,7 @@
                 	                   HorizontalOptions="Center"
                 	                   TextColor="{StaticResource ColorFontInverse}"
                 	                   IsVisible="{Binding IsRunning}"
-                	                   Title="Loading..."
+                	                   Title="{i18n:Translate Loading}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"
                 	                   ViewBoxHeight="80" />

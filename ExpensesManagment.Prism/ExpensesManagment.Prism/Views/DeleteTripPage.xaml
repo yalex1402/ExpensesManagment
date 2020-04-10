@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:i18n="clr-namespace:ExpensesManagment.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.DeleteTripPage"
              Title="{Binding Title}"
@@ -23,7 +24,7 @@
                 	       Grid.Row="0"
                            FontSize="Subtitle"
                            FontAttributes="Bold"
-                	       Text="Do you want to delete the trip:"
+                	       Text="{i18n:Translate DeleteTripMessage}"
                 	       VerticalOptions="Center"/>
 
                     <Label Grid.Column="1"
@@ -37,12 +38,12 @@
                 	       Grid.Row="1"
                            FontSize="Subtitle"
                            FontAttributes="Bold"
-                	       Text="Write your email to confirm"
+                	       Text="{i18n:Translate EmailConfirm}"
                 	       VerticalOptions="Center"/>
 
                     <Entry Grid.Column="1"
                 	       Grid.Row="1"
-                	       Placeholder="email"
+                	       Placeholder="{i18n:Translate EmailPlaceHolder}"
                            Keyboard="Email"
                            Text="{Binding Email}"/>
                     
@@ -50,7 +51,7 @@
 
                 <Button Command="{Binding DeleteTripCommand}"
             	        IsEnabled="{Binding IsEnabled}"
-            	        Text="Delete Trip"
+            	        Text="{i18n:Translate Delete}"
                         VerticalOptions="EndAndExpand"/>
 
             </StackLayout>
@@ -62,7 +63,7 @@
                 	                       HorizontalOptions="Center"
                 	                       TextColor="{StaticResource ColorFontInverse}"
                 	                       IsVisible="{Binding IsRunning}"
-                	                       Title="Loading..."
+                	                       Title="{i18n:Translate Loading}"
                 	                       VerticalOptions="Center"
                 	                       ViewBoxWidth="80"
                 	                       ViewBoxHeight="80" />

@@ -1,6 +1,7 @@
 ﻿using ExpensesManagment.Common.Helpers;
 using ExpensesManagment.Common.Models;
 using ExpensesManagment.Common.Services;
+using ExpensesManagment.Prism.Helpers;
 using ExpensesManagment.Prism.Views;
 using Newtonsoft.Json;
 using Prism.Commands;
@@ -87,7 +88,7 @@ namespace ExpensesManagment.Prism.ViewModels
             {
                 Expense = parameters.GetValue<ExpenseResponse>("expense");
                 Image = Expense.PictureFullPath;
-                Title = $"{Expense.Type.Name} detail";
+                Title = $"{Languages.Details}";
             }
         }
     }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:i18n="clr-namespace:ExpensesManagment.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.ModifyTripPage"
              Title="{Binding Title}"
@@ -28,16 +29,16 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Text="City Name"
+                               Text="{i18n:Translate CityVisited}"
                                VerticalOptions="Center"/>
                         <Entry Grid.Row="0"
                                Grid.Column="1"
-                               Placeholder="City that you've been visited"
+                               Placeholder="{i18n:Translate CityVisitedPlaceHolder}"
                                Text="{Binding Trip.CityVisited}"/>
 
                         <Label Grid.Row="1"
                                Grid.Column="0"
-                               Text="Start Date"
+                               Text="{i18n:Translate StartDate}"
                                VerticalOptions="Center"/>
                         <DatePicker Grid.Row="1"
                                Grid.Column="1"
@@ -47,7 +48,7 @@
 
                         <Label Grid.Row="2"
                                Grid.Column="0"
-                               Text="End Date"
+                               Text="{i18n:Translate EndDate}"
                                VerticalOptions="Center"/>
                         <DatePicker Grid.Row="2"
                                Grid.Column="1"
@@ -62,7 +63,7 @@
                          VerticalOptions="EndAndExpand">
                 <Button Command="{Binding SaveCommand}"
                         IsEnabled="{Binding IsEnabled}"
-                        Text="Save"/>
+                        Text="{i18n:Translate Save}"/>
             </StackLayout>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
@@ -72,7 +73,7 @@
                 	                   HorizontalOptions="Center"
                 	                   TextColor="{StaticResource ColorFontInverse}"
                 	                   IsVisible="{Binding IsRunning}"
-                	                   Title="Loading..."
+                	                   Title="{i18n:Translate Loading}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"
                 	                   ViewBoxHeight="80" />

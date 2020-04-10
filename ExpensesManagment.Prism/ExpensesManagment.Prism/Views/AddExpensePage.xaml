@@ -5,6 +5,7 @@
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:i18n="clr-namespace:ExpensesManagment.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ExpensesManagment.Prism.Views.AddExpensePage"
              Title="{Binding Title}"
@@ -46,29 +47,29 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Text="Register As"
+                               Text="{i18n:Translate Expenses}"
                                VerticalOptions="Center"/>
                         <Picker Grid.Row="0"
                                 Grid.Column="1"
                                 ItemDisplayBinding="{Binding Name}"
                                 ItemsSource="{Binding ExpenseTypes}"
                                 SelectedItem="{Binding ExpenseType}"
-                                Title="Select an expense type"
+                                Title="{i18n:Translate ExpenseType}"
                                 BackgroundColor="{StaticResource ColorFontInverse}">
                         </Picker>
 
                         <Label Grid.Row="1"
                                Grid.Column="0"
-                               Text="Description"
+                               Text="{i18n:Translate Details}"
                                VerticalOptions="Center"/>
                         <Entry Grid.Row="1"
                                Grid.Column="1"
-                               Placeholder="A little description"
+                               Placeholder="{i18n:Translate DetailsPlaceHolder}"
                                Text="{Binding Expense.Description}"/>
 
                         <Label Grid.Row="2"
                                Grid.Column="0"
-                               Text="Value ($)"
+                               Text="{i18n:Translate Value}"
                                VerticalOptions="Center"/>
                         <Entry Grid.Row="2"
                                Grid.Column="1"
@@ -78,7 +79,7 @@
 
                         <Label Grid.Row="3"
                                Grid.Column="0"
-                               Text="Date"
+                               Text="{i18n:Translate Date}"
                                VerticalOptions="Center"/>
                         <DatePicker Grid.Row="3"
                                Grid.Column="1"
@@ -91,7 +92,7 @@
             </ScrollView>
             <Button Command="{Binding AddCommand}"
                     IsEnabled="{Binding IsEnabled}"
-                    Text="Add Expense"/>
+                    Text="{i18n:Translate AddExpense}"/>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="ZoomingTarget" 
                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
@@ -100,7 +101,7 @@
                 	                   HorizontalOptions="Center"
                 	                   TextColor="{StaticResource ColorFontInverse}"
                 	                   IsVisible="{Binding IsRunning}"
-                	                   Title="Loading..."
+                	                   Title="{i18n:Translate Loading}"
                 	                   VerticalOptions="Center"
                 	                   ViewBoxWidth="80"
                 	                   ViewBoxHeight="80" />
